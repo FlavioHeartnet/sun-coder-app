@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
+import toast from "react-hot-toast";
+
 
 
 
@@ -14,16 +16,30 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handlelogin = async  () =>{
+    toast.promise(
+    login(),
+    {
+      loading: 'Logging...',
+      success: () => {
+        window.location.href = "/";
+        return (<b>Successfully Logged!</b>)
+      },
+      error: <b>Could not login.</b>,
+    }
+  );
+    
+
+      
+  }
+  const login = async () => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password,
     });
-
     if (error) {
-      console.error(error);
-    } else {
-      console.log("User logged in:", data);
-    }
+      console.log("Error:", error);
+      throw Error("error: "+ error);
+    } 
   }
   return (
     <div className="flex flex-col h-screen">
