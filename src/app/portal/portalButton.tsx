@@ -15,6 +15,7 @@ export default function PortalButton() {
       .from('stripe_customers')
       .select('stripe_customer_id, plan_active')
       .eq('user_id', user.id)
+      .order('created_at', { ascending: false } as any)
       .single();
     
       if(customer?.plan_active){

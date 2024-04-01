@@ -21,7 +21,6 @@ export async function POST(request: NextRequest) {
         const session: Stripe.Checkout.Session = event.data.object;
         console.log(session);
         const userId = session.metadata?.user_id;
-        console.log(userId);
         // Create or update the stripe_customer_id in the stripe_customers table
         const { error } = await supabaseAdmin
         .from('stripe_customers')
@@ -30,13 +29,15 @@ export async function POST(request: NextRequest) {
             stripe_customer_id: session.customer, 
             subscription_id: session.subscription, 
             plan_active: true, 
-            plan_expires: null 
+            plan_expires: null,
+            created_at: new Date(), 
         })
 
         if(error){
             console.log(error.message)
             return NextResponse.json({ message: error.message }, { status: 500 });
         }
+        console.log('Success stored in DB');
       }
   
       if (event.type === 'customer.subscription.updated') {
@@ -45,7 +46,7 @@ export async function POST(request: NextRequest) {
             // Update the plan_expires field in the stripe_customers table
         const { error } = await supabaseAdmin
             .from('stripe_customers')
-            .update({ plan_expires: subscription.cancel_at, plan_active: subscription.cancel_at == null })
+            .update({ plan_expires: subscription.cancel_at })
             .eq('subscription_id', subscription.id);
             if(error){
               console.log(error.message)

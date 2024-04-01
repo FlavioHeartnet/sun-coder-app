@@ -45,11 +45,10 @@ export default function HomePage(){
         <div className="grid items-center gap-6 px-4 text-center md:px-6 lg:gap-10">
           <div className="space-y-3">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-              The complete platform for building the Web
+              The complete platform to learn Web development
             </h1>
             <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Give your team the toolkit to stop configuring and start innovating. Securely build, deploy, and scale the
-              best web experiences.
+              Give yourself a platform to learn web development from scratch. 
             </p>
           </div>
           <div className="mx-auto w-full max-w-sm space-y-2">

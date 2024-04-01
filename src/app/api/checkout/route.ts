@@ -15,6 +15,7 @@ export async function POST(request: Request) {
                 {
                     // base subscription
                     price: priceId,
+                    quantity: 1,
                 },
             ],
             mode: 'subscription',
