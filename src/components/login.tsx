@@ -8,6 +8,7 @@ import Image from "next/image"
 import { useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import toast from "react-hot-toast";
+import { cookies } from "next/headers";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -34,7 +35,7 @@ export function Login() {
     if (error) {
       console.log("Error:", error);
       throw Error("error: "+ error);
-    } 
+    }  
   }
   return (
     <div className="flex flex-col h-screen">

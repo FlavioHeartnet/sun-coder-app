@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
             // Update the plan_expires field in the stripe_customers table
         const { error } = await supabaseAdmin
             .from('stripe_customers')
-            .update({ plan_expires: subscription.cancel_at })
+            .update({ plan_expires: subscription.cancel_at, plan_active: subscription.cancel_at == null })
             .eq('subscription_id', subscription.id);
             if(error){
               console.log(error.message)
