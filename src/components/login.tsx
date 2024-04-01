@@ -9,9 +9,6 @@ import { useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import toast from "react-hot-toast";
 
-
-
-
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,14 +18,12 @@ export function Login() {
     {
       loading: 'Logging...',
       success: () => {
-        window.location.href = "/";
+        window.location.href = "/home";
         return (<b>Successfully Logged!</b>)
       },
       error: <b>Could not login.</b>,
     }
   );
-    
-
       
   }
   const login = async () => {
@@ -43,7 +38,7 @@ export function Login() {
   }
   return (
     <div className="flex flex-col h-screen">
-      <main className="flex-1 flex items-center justify-center p-4">
+      <div className="flex-1 flex items-center justify-center p-4">
         <div className="mx-auto max-w-sm space-y-4 text-left">
           <div className="flex justify-center">
             <Image src='/sun.svg'  className="dark:invert" alt={""} width={100} height={100} />
@@ -69,8 +64,8 @@ export function Login() {
             
           </div>
         </div>
-      </main>
-      <footer className="flex p-4 text-left gap-2 text-sm border-t dark:border-gray-800">
+      </div>
+      <div className="flex p-4 text-left gap-2 text-sm border-t dark:border-gray-800">
         <span className="text-gray-500">© 2024 SunCoder Inc</span>
         <Link className="text-blue-600 underline" href="#">
           Terms
@@ -78,7 +73,7 @@ export function Login() {
         <Link className="text-blue-600 underline" href="#">
           Privacy
         </Link>
-      </footer>
+      </div>
     </div>
   )
 }
