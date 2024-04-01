@@ -19,7 +19,8 @@ const config: Config = {
   },
   plugins: [
     tailwindTypography,
-    daisyui
-  ],
+    daisyui,
+      require("tailwindcss-animate")
+],
 };
 export default config;
