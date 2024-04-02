@@ -1,19 +1,22 @@
+'use client';
 import {Login} from "./../components/login"
 import { supabase } from "../../utils/supabaseClient";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 
 export default function Home() {
-    const cookieStore = cookies();
-    const token = cookieStore.get('token');
+  const router = useRouter();
+  useEffect(()=>{
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser(token?.value);
+      const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        redirect('/home');
+        router.push('/home');
       }
     }
     getUser();
+  }, [router]);
+    
 
   return (
       <Login/>

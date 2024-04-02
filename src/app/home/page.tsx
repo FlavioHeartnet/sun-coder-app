@@ -10,20 +10,7 @@ import { useEffect } from "react";
 
 
 export default function HomePage(){
-    const router = useRouter();
-    useEffect(() => {
-      const checkSession = async () => {
-        const { data: { session } } = await supabase.auth.getSession();
-        session?.access_token
-        if (!session) {
-          router.push('/');
-        }
-    }
-    checkSession();
-    }, []);
-    
-
-    
+    const router = useRouter();  
     async function signOut() {
         const { error } = await supabase.auth.signOut()
         if (error) console.log('Error logging out:', error.message)
