@@ -1,7 +1,7 @@
 'use client';
 import CheckoutButton from "@/components/checkoutbutton";
-import PortalButton from "../portal/portalButton";
 import Layout from "../homeLayout";
+import Courses from "./courses";
 export default function HomePage(){
     
 
@@ -18,10 +18,11 @@ export default function HomePage(){
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
-              <CheckoutButton/>
+              <a href="#courses" className="btn btn-accent text-xl mt-2 w-64">Let's cook</a>
             </div>
           </div>
         </section>
+        <Courses/>
       </Layout>
     );
 }

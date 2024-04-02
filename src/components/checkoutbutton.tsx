@@ -38,7 +38,7 @@ export default function CheckoutButton() {
   return (
     <div>
 
-      <button className="btn btn-accent mt-2 w-64" onClick={handleCheckout}>Buy Now</button>
+      <button className="btn btn-accent mt-2 w-64" onClick={handleCheckout}>Buy a subscription</button>
     </div>
   );
 }
