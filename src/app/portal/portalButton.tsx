@@ -3,6 +3,8 @@
 import { createPortalSession } from './portalAction';
 import { supabase } from './../../../utils/supabaseClient';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function PortalButton() {
   const handleClick = async () => {
@@ -34,9 +36,10 @@ export default function PortalButton() {
 
   return (
     <>
-      <button className="btn btn-primary btn-outline my-3 w-64" onClick={handleClick}>
-        Manage Billing
-      </button>
+        <Link onClick={handleClick} className="flex items-center gap-2 text-sm font-medium [&:hover]:underline" href="#">
+            <Image src='/gear.svg' className="dark:invert" alt={""} width={15} height={15} />
+            <span>Manage Billing</span>
+        </Link>
     </>
   );
 }

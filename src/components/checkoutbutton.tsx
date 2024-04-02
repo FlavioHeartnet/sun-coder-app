@@ -19,7 +19,7 @@ export default function CheckoutButton() {
             .select('plan_active')
             .eq('user_id', data.user.id).order('id', {ascending: false}).single();
     if(customer?.plan_active){
-      toast.error('You already have a subscription!!');
+      toast.error('You already have an active subscription!!');
       return;
     }
     const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
