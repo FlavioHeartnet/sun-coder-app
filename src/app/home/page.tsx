@@ -5,22 +5,30 @@ import { supabase } from './../../../utils/supabaseClient';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
 
 
 export default function HomePage(){
-
-    const checkSession = async () => {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-          window.location.href = '/'
+    const router = useRouter();
+    useEffect(() => {
+      const checkSession = async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        session?.access_token
+        if (!session) {
+          router.push('/');
         }
     }
     checkSession();
+    }, []);
+    
+
+    
     async function signOut() {
         const { error } = await supabase.auth.signOut()
         if (error) console.log('Error logging out:', error.message)
         else {
-            window.location.href='/';
+          router.push('/');
         }
       }
 

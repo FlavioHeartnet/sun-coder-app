@@ -8,18 +8,21 @@ import Image from "next/image"
 import { useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import toast from "react-hot-toast";
-import { cookies } from "next/headers";
+import { useRouter } from 'next/navigation';
 
 export function Login() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const handlelogin = async  () =>{
     toast.promise(
     login(),
     {
       loading: 'Logging...',
       success: () => {
-        window.location.href = "/home";
+        
+        router.push("/home");
         return (<b>Successfully Logged!</b>)
       },
       error: <b>Could not login.</b>,
@@ -36,6 +39,14 @@ export function Login() {
       console.log("Error:", error);
       throw Error("error: "+ error);
     }  
+    await fetch("/api/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${data.session.access_token}`,
+      },
+    });
+    
   }
   return (
     <div className="flex flex-col h-screen">

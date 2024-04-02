@@ -19,7 +19,6 @@ export async function POST(request: NextRequest) {
       // Handle the checkout.session.completed event
       if (event.type === 'checkout.session.completed') {
         const session: Stripe.Checkout.Session = event.data.object;
-        console.log(session);
         const userId = session.metadata?.user_id;
         // Create or update the stripe_customer_id in the stripe_customers table
         const { error } = await supabaseAdmin
@@ -42,7 +41,6 @@ export async function POST(request: NextRequest) {
   
       if (event.type === 'customer.subscription.updated') {
         const subscription: Stripe.Subscription = event.data.object;
-        console.log(subscription);
             // Update the plan_expires field in the stripe_customers table
         const { error } = await supabaseAdmin
             .from('stripe_customers')
@@ -56,7 +54,6 @@ export async function POST(request: NextRequest) {
   
       if (event.type === 'customer.subscription.deleted') {
         const subscription = event.data.object;
-        console.log(subscription);
 
         const { error } = await supabaseAdmin
         .from('stripe_customers')
