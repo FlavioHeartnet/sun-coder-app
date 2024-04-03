@@ -1,3 +1,5 @@
+//TODO: Make the courses purchaseble in stripe and update database
+
 import CheckoutButton from "@/components/checkoutbutton";
 
 export default function Courses(){
