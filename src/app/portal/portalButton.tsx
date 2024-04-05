@@ -3,12 +3,14 @@
 import { createPortalSession } from './portalAction';
 import { supabase } from './../../../utils/supabaseClient';
 import toast from 'react-hot-toast';
-import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function PortalButton() {
+  const [ pending, setPending ] = useState(false);
   const handleClick = async () => {
     try {
+      setPending(true);
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         throw 'Please log in to manage your billing.';
@@ -22,6 +24,7 @@ export default function PortalButton() {
     
       if(customer?.plan_active){
         const { url } = await createPortalSession(customer?.stripe_customer_id);
+        setPending(false);
         window.location.href = url;
       }else{
         toast.error('Please upgrade your plan to manage your billing.');
@@ -36,10 +39,10 @@ export default function PortalButton() {
 
   return (
     <>
-        <Link onClick={handleClick} className="flex items-center gap-2 text-sm font-medium [&:hover]:underline" href="#">
+        <button disabled={pending} onClick={handleClick} className="flex items-center gap-2 text-sm font-medium [&:hover]:underline disabled:text-zing-600 disabled:cursor-progress" >
             <Image src='/gear.svg' className="dark:invert" alt={""} width={15} height={15} />
             <span>Manage Billing</span>
-        </Link>
+        </button>
     </>
   );
 }
