@@ -21,8 +21,6 @@ export function Login() {
     {
       loading: 'Logging...',
       success: () => {
-        
-        router.push("/home");
         return (<b>Successfully Logged!</b>)
       },
       error: <b>Could not login.</b>,
@@ -31,21 +29,15 @@ export function Login() {
       
   }
   const login = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password,
     });
     if (error) {
       console.log("Error:", error);
       throw Error("error: "+ error);
-    }  
-    await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${data.session.access_token}`,
-      },
-    });
+    } 
+    router.replace("/"); 
     
   }
   return (
