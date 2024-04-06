@@ -9,7 +9,7 @@ import CheckoutYearly from "./checkoutYearly"
 
 export function PriceList() {
   return (
-    <div className="w-full py-12 flex justify-center">
+    <div id="assinar" className="w-full py-12 flex justify-center min-h-screen">
       <div className="container grid gap-6 px-4 md:px-6 lg:grid-cols-2 xl:gap-12">
         <div className="flex flex-col justify-center space-y-4">
           <div className="space-y-2">
@@ -19,7 +19,7 @@ export function PriceList() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col gap-4 min-[300px]:justify-end">
+        <div className="mb-16 flex flex-col gap-4 min-[300px]:justify-end">
           <Card>
             <CardContent className="p-6 grid gap-4">
               <div className="flex items-center gap-4">

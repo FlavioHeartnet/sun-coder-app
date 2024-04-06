@@ -1,7 +1,9 @@
 //TODO: Make the courses purchaseble in stripe and update database
 
 import CheckoutButton from "@/components/checkoutMonthtly";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Courses(){
     return(
@@ -60,7 +62,12 @@ export default function Courses(){
                         </p>
                     </div>
                     </div>
+                   
                 </div>
+                <div className="mx-auto">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Quer aproveitar e levar logo tudo de uma vez?</p>
+                        <Link href='#assinar' className="btn btn-accent text-xl mt-2 w-64">Saiba mais</Link>
+                    </div>
                 </div>
             </section>
         </div>

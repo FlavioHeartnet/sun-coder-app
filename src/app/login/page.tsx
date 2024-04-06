@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { login, signup } from "./actions";
+import Footer from "@/components/footer";
 
 
 export default function LoginPage() {
@@ -41,15 +42,7 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-    <div className="flex p-4 text-left gap-2 text-sm border-t dark:border-gray-800">
-      <span className="text-gray-500">© 2024 SunCoder Inc</span>
-      <Link className="text-blue-600 underline" href="#">
-        Terms
-      </Link>
-      <Link className="text-blue-600 underline" href="#">
-        Privacy
-      </Link>
-    </div>
+    <Footer/>
   </div>
   );
 }

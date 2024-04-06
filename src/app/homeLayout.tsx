@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import UserOptions from "@/components/userOptions";
 import { Suspense } from "react";
+import Footer from "@/components/footer";
 
 export default async function Layout({ children }: Readonly<{
     children: React.ReactNode;
@@ -19,6 +20,7 @@ export default async function Layout({ children }: Readonly<{
                 
             </nav>
             {children}
+            <Footer/>
         </main>
     )
 }
