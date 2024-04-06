@@ -1,5 +1,6 @@
 import Layout from "./homeLayout";
 import Courses from "./home/courses";
+import { PriceList } from "@/components/pricelist";
 export default function HomePage(){
   
     return (
@@ -20,6 +21,7 @@ export default function HomePage(){
           </div>
         </section>
         <Courses/>
+        <PriceList/>
       </Layout>
     );
 }

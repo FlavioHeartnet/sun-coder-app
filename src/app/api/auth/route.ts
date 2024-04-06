@@ -8,7 +8,7 @@ export async function POST() {
             throw 'supabase auth error';
         }
 
-        return NextResponse.json({ message: 'User token validated', user_id: user.id }, { status: 200 });
+        return NextResponse.json({ message: 'User token validated', user_id: user.id, email: user.email }, { status: 200 });
     }catch(error){
         return NextResponse.json({ message: error }, { status: 500 });
     }

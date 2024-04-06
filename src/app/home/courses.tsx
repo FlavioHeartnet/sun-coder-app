@@ -1,6 +1,6 @@
 //TODO: Make the courses purchaseble in stripe and update database
 
-import CheckoutButton from "@/components/checkoutbutton";
+import CheckoutButton from "@/components/checkoutMonthtly";
 
 export default function Courses(){
     return(
@@ -66,7 +66,6 @@ export default function Courses(){
                     Or get access to <b>everything</b> for the best price:
                     </p>
                 </div>
-                <CheckoutButton/>
                 </div>
             </section>
         </div>
