@@ -1,4 +1,3 @@
-'use client';
 import Layout from "./homeLayout";
 import Courses from "./home/courses";
 export default function HomePage(){

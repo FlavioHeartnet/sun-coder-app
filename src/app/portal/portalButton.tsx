@@ -11,14 +11,21 @@ export default function PortalButton() {
   const handleClick = async () => {
     try {
       setPending(true);
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
+      const response = await fetch('/api/auth', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { user_id } = await response.json();
+      if (!user_id) {
+        setPending(false);
         throw 'Please log in to manage your billing.';
       }
       const { data: customer, error: fetchError } = await supabase
       .from('stripe_customers')
       .select('stripe_customer_id, plan_active')
-      .eq('user_id', user.id)
+      .eq('user_id', user_id)
       .order('created_at', { ascending: false } as any)
       .single();
     

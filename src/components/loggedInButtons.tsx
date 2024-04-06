@@ -1,20 +1,22 @@
 import PortalButton from "@/app/portal/portalButton";
 import Link from "next/link";
+import { JSX, SVGProps } from "react";
+import Logout from "./logout";
 
 export default function LoggedInButton() {
 	return (
-		<div>
+		<div className="flex gap-4">
 			<Link className="flex items-center gap-2 text-sm font-medium [&:hover]:underline" href="#">
                 <UserIcon className="h-4 w-4" />
                 <span className="hidden md:block">Profile</span>
             </Link>
             <PortalButton/>
-            <LoggedInButton/>
+        <Logout/>
 		</div>
     )
 }
 
-function UserIcon(props) {
+function UserIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
       <svg
         {...props}
