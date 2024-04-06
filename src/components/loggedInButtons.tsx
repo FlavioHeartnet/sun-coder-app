@@ -7,11 +7,11 @@ export default function LoggedInButton() {
 	return (
 		<div className="flex gap-4">
 			<Link className="flex items-center gap-2 text-sm font-medium [&:hover]:underline" href="#">
-                <UserIcon className="h-4 w-4" />
-                <span className="hidden md:block">Perfil</span>
-            </Link>
-            <PortalButton/>
-        <Logout/>
+              <UserIcon className="h-4 w-4" />
+              <span className="hidden md:block">Perfil</span>
+          </Link>
+          <PortalButton/>
+          <Logout/>
 		</div>
     )
 }

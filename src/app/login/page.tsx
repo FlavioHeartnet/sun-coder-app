@@ -32,10 +32,10 @@ export default function LoginPage() {
             <Label htmlFor="password">Senha</Label>
             <Input id="password" name="password" placeholder="Sua senha" required type="password" />
           </div>
-          <div className="space-y-2 ">
+          <div className="space-y-2 text-center">
             <Button formAction={login} className="mt-8 w-full">Login</Button>
-            <Button className="mt-4 w-full">Entrar com Google</Button>
-            <button formAction={signup}>Cadastre-se</button>
+            <Button className="mt-4 w-full flex gap-2"> <Image src='/google.svg' alt="" height={20} width={20} /> Entrar com Google</Button>
+            <button formAction={signup} className="text-blue-500">Cadastre-se</button>
           </div>
           </form>
         </div>
