@@ -19,23 +19,23 @@ export default function LoginPage() {
           <Image src='/sun.svg'  className="dark:invert" alt={""} width={100} height={100} />
         </div>
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Welcome to SunCoder</h1>
-          <p className="text-gray-500 dark:text-gray-400">Enter your email below to login to your account</p>
+          <h1 className="text-3xl font-bold">SunCoder</h1>
+          <p className="text-gray-500 dark:text-gray-400">Digite seu e-mail abaixo para acessar sua conta.</p>
         </div>
         <div className="space-y-4">
         <form>
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" placeholder="your e-mail" required type="email" />
+            <Label htmlFor="email">E-mail</Label>
+            <Input id="email" name="email" placeholder="Seu e-mail" required type="email" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" name="password" placeholder="your password" required type="password" />
+            <Label htmlFor="password">Senha</Label>
+            <Input id="password" name="password" placeholder="Sua senha" required type="password" />
           </div>
           <div className="space-y-2 ">
             <Button formAction={login} className="mt-8 w-full">Login</Button>
-            <Button className="mt-4 w-full">Login with Google</Button>
-            <button formAction={signup}>Sign up</button>
+            <Button className="mt-4 w-full">Entrar com Google</Button>
+            <button formAction={signup}>Cadastre-se</button>
           </div>
           </form>
         </div>

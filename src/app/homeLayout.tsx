@@ -13,7 +13,7 @@ export default async function Layout({ children }: Readonly<{
                     <Image src='/sun.svg' className="dark:invert" alt={""} width={24} height={24} />
                     <span>SunCoder</span>
                 </Link>
-                <Suspense fallback='Loading...'>
+                <Suspense fallback='carregando...'>
                     <UserOptions />
                 </Suspense>
                 

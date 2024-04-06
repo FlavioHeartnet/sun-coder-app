@@ -13,10 +13,9 @@ export function PriceList() {
       <div className="container grid gap-6 px-4 md:px-6 lg:grid-cols-2 xl:gap-12">
         <div className="flex flex-col justify-center space-y-4">
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter lg:text-4xl xl:text-5xl">Pro Subscription</h1>
+            <h1 className="text-3xl font-bold tracking-tighter lg:text-4xl xl:text-5xl">Assinatura Pro</h1>
             <p className="max-w-[500px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Unlock the full potential of your creativity with the Pro Subscription. Gain access to all courses and
-              features that will take your projects to the next level.
+              Libere todo o potencial da sua criatividade com a Assinatura Pro. Tenha acesso a todos os cursos e recursos que vão elevar seus projetos a outro patamar.
             </p>
           </div>
         </div>

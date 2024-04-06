@@ -48,7 +48,7 @@ export default function PortalButton() {
     <>
         <button disabled={pending} onClick={handleClick} className="flex items-center gap-2 text-sm font-medium [&:hover]:underline disabled:text-zing-600 disabled:cursor-progress" >
             <Image src='/gear.svg' className="dark:invert" alt={""} width={15} height={15} />
-            <span>Manage Billing</span>
+            <span>Gerenciar Pagamentos</span>
         </button>
     </>
   );

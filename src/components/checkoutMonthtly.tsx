@@ -21,7 +21,7 @@ export default function CheckoutMonthly() {
 
     if (!user_id) {
       setPending(false);
-      toast.error("Please log in to create a new Stripe Checkout session");
+      toast.error("Por favor entre com sua conta ou cadastre-se!!");
       return;
     }
 
@@ -31,7 +31,7 @@ export default function CheckoutMonthly() {
             .eq('user_id', user_id).order('id', {ascending: false}).single();
 
     if(customer?.plan_active){
-      toast.error('You already have an active subscription!!');
+      toast.error('Você já possui uma assinatura ativa!');
       setPending(false);
       return;
     }

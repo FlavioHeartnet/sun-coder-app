@@ -4,6 +4,7 @@
  */
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { JSX, SVGProps } from "react"
 
 export function Cancel() {
   const handleRedirectHome = () => {
@@ -13,15 +14,15 @@ export function Cancel() {
     <div className="flex flex-col items-center gap-4 p-4">
       <div className="flex flex-col items-center gap-2 text-center">
         <XCircleIcon className="h-12 w-12 text-red-500" />
-        <div className="text-lg font-semibold">Purchase Canceled</div>
+        <div className="text-lg font-semibold">Compra cancelada</div>
         <div className="text-sm text-gray-500 dark:text-gray-400">
-          Your purchase has been canceled. If you have any questions, please contact support.
+          Sua compra foi cancelada. Se você tiver alguma dúvida, entre em contato com o suporte.
         </div>
       </div>
       <div className="flex items-center gap-2">
         <Link className="flex-1" href="#">
           <Button onClick={handleRedirectHome} className="w-full" size="lg" variant="outline">
-            Return to Homepage
+            Voltar
           </Button>
         </Link>
       </div>
@@ -30,7 +31,7 @@ export function Cancel() {
 }
 
 
-function XCircleIcon(props) {
+function XCircleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
