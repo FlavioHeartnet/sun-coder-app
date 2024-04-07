@@ -9,10 +9,10 @@ export default function ErrorPage() {
           <FlagIcon className="mx-auto text-6xl text-gray-500 translate-y-0.5" />
           <div className="space-y-2">
             <h1 className="font-bold text-3xl tracking-tighter sm:text-4xl md:text-5xl">
-              Uh oh. Something went wrong.
+              Ops! Algo deu errado.
             </h1>
             <p className="mx-auto max-w-[400px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              We cannot complete your request at the moment. Please try again later.
+              Não podemos concluir sua solicitação no momento. Por favor, tente novamente mais tarde. 
             </p>
           </div>
         </div>
@@ -21,7 +21,7 @@ export default function ErrorPage() {
             className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm gap-1.5 sm:gap-1.5 md:gap-2.5 lg:gap-2.5 xl:gap-2.5 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
             href="/"
           >
-            Go back
+            Voltar
           </Link>
         </div>
       </div>
