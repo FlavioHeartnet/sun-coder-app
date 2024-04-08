@@ -1,4 +1,4 @@
-import PortalButton from "@/app/portal/portalButton";
+import PortalButton from "@/app/managebilling/portalButton";
 import Link from "next/link";
 import { JSX, SVGProps } from "react";
 import Logout from "./logout";

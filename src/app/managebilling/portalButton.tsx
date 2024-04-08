@@ -1,7 +1,7 @@
 'use client';
 
 import { createPortalSession } from './portalAction';
-import { supabase } from './../../../utils/supabaseClient';
+import { supabase } from '../../../utils/supabaseClient';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ export default function PortalButton() {
       const { user_id } = await response.json();
       if (!user_id) {
         setPending(false);
-        throw 'Please log in to manage your billing.';
+        throw 'Por favor, acesse sua conta para gerenciar sua fatura.';
       }
       const { data: customer, error: fetchError } = await supabase
       .from('stripe_customers')
@@ -34,13 +34,13 @@ export default function PortalButton() {
         setPending(false);
         window.location.href = url;
       }else{
-        toast.error('Please upgrade your plan to manage your billing.');
+        toast.error('Atualize seu plano para gerenciar sua faturamento.');
       }
       
 
     } catch (error) {
       console.error(error);
-      toast.error('Failed to create billing portal session:');
+      toast.error('Configurações do Portal de Cobrança Incompletas.');
     }
   }
 
@@ -48,7 +48,7 @@ export default function PortalButton() {
     <>
         <button disabled={pending} onClick={handleClick} className="flex items-center gap-2 text-sm font-medium [&:hover]:underline disabled:text-zing-600 disabled:cursor-progress" >
             <Image src='/gear.svg' className="dark:invert" alt={""} width={15} height={15} />
-            <span>Gerenciar Pagamentos</span>
+            <span>Gerenciar Faturamento</span>
         </button>
     </>
   );
