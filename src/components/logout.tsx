@@ -1,6 +1,4 @@
 'use client';
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function Logout() {
