@@ -1,17 +1,16 @@
 'use server';
-import { supabaseAdmin } from "../../utils/supabaseServer";
+import { SessionValidation } from "../../utils/sessionValidation";
 import LoggedInButtons from "./loggedInButtons";
 import LoggedOutButton from "./loggedOutButtons";
 
 export default async function UserOptions(){
-const supabase = supabaseAdmin()
 
-  const { data, error } = await supabase.auth.getUser()
+  const [ isAuth] = await SessionValidation();
     return (
 
             <div className="ml-auto flex items-center gap-4">
             {
-              error || !data?.user ? <LoggedOutButton/> : <LoggedInButtons/>
+              isAuth ? <LoggedInButtons/> : <LoggedOutButton/>
             }
             </div>
     );

@@ -17,9 +17,9 @@ export default function CheckoutMonthly() {
         "Content-Type": "application/json",
       },
     });
-    const { user_id, email } = await responseAuth.json();
+    const { user_id, email, isAuth } = await responseAuth.json();
 
-    if (!user_id) {
+    if (!isAuth) {
       setPending(false);
       toast.error("Por favor entre com sua conta ou cadastre-se!!");
       return;

@@ -1,9 +1,7 @@
 'use client';
 import Image from "next/image";
-import { supabase } from "../../../utils/supabaseClient";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { login, signup } from "./actions";
@@ -11,7 +9,7 @@ import Footer from "@/components/footer";
 
 
 export default function LoginPage() {
-
+  const isKindeAuth = false;
   return (
     <div className="flex flex-col h-screen">
     <div className="flex-1 flex items-center justify-center p-4">
@@ -33,11 +31,19 @@ export default function LoginPage() {
             <Label htmlFor="password">Senha</Label>
             <Input id="password" name="password" placeholder="Sua senha" required type="password" />
           </div>
-          <div className="space-y-2 text-center">
-            <Button formAction={login} className="mt-8 w-full">Login</Button>
-            <Button className="mt-4 w-full flex gap-2"> <Image src='/google.svg' alt="" height={20} width={20} /> Entrar com Google</Button>
-            <button formAction={signup} className="text-blue-500">Cadastre-se</button>
-          </div>
+          {
+            isKindeAuth ?
+                  <div className="space-y-2 text-center">
+                    <Button formAction={login} className="mt-8 w-full">Login</Button>
+                    <Button className="mt-4 w-full flex gap-2"> <Image src='/google.svg' alt="" height={20} width={20} /> Entrar com Google</Button>
+                    <button formAction={signup} className="text-blue-500">Cadastre-se</button>
+                  </div> :
+                  <div className="space-y-2 text-center mt-8">
+                    <LoginLink className=" w-full">Entrar</LoginLink><br/><br/>
+                    <RegisterLink className="mt-4 w-full">Cadastre-se</RegisterLink>
+                  </div>
+          }
+          
           </form>
         </div>
       </div>

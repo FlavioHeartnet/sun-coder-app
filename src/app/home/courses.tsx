@@ -1,7 +1,5 @@
 //TODO: Make the courses purchaseble in stripe and update database
 
-import CheckoutButton from "@/components/checkoutMonthtly";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
