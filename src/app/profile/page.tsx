@@ -1,13 +1,25 @@
+//TODO: isAuth is not working, probably because of a layout issue, fix it later
 import { Input } from "@/components/ui/input"
 import Layout from "../homeLayout"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+    const response = await fetch('/api/auth', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const [isAuth] = await response.json();
     return (
-        <Layout>
+            <Layout>
             <div className="container mx-auto grid items-center justify-center min-h-screen">
+            {
+                isAuth ? 
+                <>
                 <div className="grid gap-6 lg:grid-cols-3">
                     <div className="space-y-6 lg:col-span-2">
                         <div className="space-y-2">
@@ -45,8 +57,32 @@ export default function ProfilePage() {
                     <Button className="md:w-64 w-full" size="lg">Salvar</Button>
                 </div>
 
+            </>
+            :
+            <div>
+                    <div className="grid gap-4">
+                        <div className="space-y-2">
+                        <div className="space-y-2">
+                            <h1 className="font-bold text-3xl tracking-tighter sm:text-4xl md:text-5xl">
+                                Ops! Algo deu errado.
+                            </h1>
+                            <p className="mx-auto max-w-[400px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                                Entre com sua conta para ter acesso a esta pagina. 
+                            </p>
+                        </div>
+                        </div>
+                        <div className="flex justify-center">
+                        <LoginLink
+                            className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm gap-1.5 sm:gap-1.5 md:gap-2.5 lg:gap-2.5 xl:gap-2.5 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
+                        >
+                            Login
+                        </LoginLink>
+                        </div>
+                    </div>
+            </div>
+        
+            } 
             </div>
         </Layout>
-
     )
 }
