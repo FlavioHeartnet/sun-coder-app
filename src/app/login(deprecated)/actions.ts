@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { supabaseAdmin } from './../../../utils/supabaseServer'
+import { supabaseAdmin } from '../../../utils/supabaseServer'
 
 export async function login(formData: FormData) {
   const supabase = supabaseAdmin();

@@ -8,10 +8,10 @@ import { JSX, SVGProps } from "react"
 
 export function Cancel() {
   const handleRedirectHome = () => {
-    window.location.href = "/home"
+    window.location.href = "/"
   }
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
+    <div className="flex flex-col justify-center items-center gap-4 p-4 min-h-screen">
       <div className="flex flex-col items-center gap-2 text-center">
         <XCircleIcon className="h-12 w-12 text-red-500" />
         <div className="text-lg font-semibold">Compra cancelada</div>
