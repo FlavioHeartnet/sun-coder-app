@@ -7,7 +7,7 @@ import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card }
 import { Button } from "@/components/ui/button"
 
 const handleRedirectHome = () => {
-  window.location.href = "/home"
+  window.location.href = "/"
 }
 
 export function Success() {
