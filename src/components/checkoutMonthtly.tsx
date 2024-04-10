@@ -5,9 +5,11 @@ import { supabase } from '../../utils/supabaseClient';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
 
 
 export default function CheckoutMonthly() {
+  const router = useRouter();
   const [pending, setPending ] = useState(false);
   const handleCheckout = async() => {
     setPending(true);
@@ -17,11 +19,11 @@ export default function CheckoutMonthly() {
         "Content-Type": "application/json",
       },
     });
-    const { user_id, email, isAuth } = await responseAuth.json();
+    const { user_id, isAuth } = await responseAuth.json();
 
     if (!isAuth) {
       setPending(false);
-      toast.error("Por favor entre com sua conta ou cadastre-se!!");
+      router.push('/api/auth/login?post_login_redirect_url=/monthlyCheckout');
       return;
     }
 
@@ -35,18 +37,7 @@ export default function CheckoutMonthly() {
       setPending(false);
       return;
     }
-    const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-    const stripe = await stripePromise;
-    const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ priceId: 'price_1P0uQlE8qUMXaBnMcngZEGta', userId: user_id, email: email }),
-      });
-    const session = await response.json();
-    setPending(false);
-    await stripe?.redirectToCheckout({ sessionId: session.id });
+    router.push('/monthlyCheckout');
   }
 
   return (
