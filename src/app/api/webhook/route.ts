@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
     try {
       const rawBody = await request.text();
       const signature = request.headers.get('stripe-signature');
-      const supabase = supabaseAdmin();
       let event;
       try {
         event = stripe.webhooks.constructEvent(rawBody, signature!, process.env.STRIPE_WEBHOOK_SECRET!);
@@ -21,7 +20,7 @@ export async function POST(request: NextRequest) {
         const session: Stripe.Checkout.Session = event.data.object;
         const userId = session.metadata?.user_id;
         // Create or update the stripe_customer_id in the stripe_customers table
-        const { error } = await supabase
+        const { error } = await supabaseAdmin
         .from('stripe_customers')
         .upsert({ 
             user_id: userId, 
@@ -42,7 +41,7 @@ export async function POST(request: NextRequest) {
       if (event.type === 'customer.subscription.updated') {
         const subscription: Stripe.Subscription = event.data.object;
             // Update the plan_expires field in the stripe_customers table
-        const { error } = await supabase
+        const { error } = await supabaseAdmin
             .from('stripe_customers')
             .update({ plan_expires: subscription.cancel_at })
             .eq('subscription_id', subscription.id);
@@ -55,7 +54,7 @@ export async function POST(request: NextRequest) {
       if (event.type === 'customer.subscription.deleted') {
         const subscription = event.data.object;
 
-        const { error } = await supabase
+        const { error } = await supabaseAdmin
         .from('stripe_customers')
         .update({ plan_active: false, subscription_id: null })
         .eq('subscription_id', subscription.id);

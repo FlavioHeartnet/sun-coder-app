@@ -19,7 +19,7 @@ export const getBillingPortalData = async (user_id:string) => {
     .from('stripe_customers')
     .select('stripe_customer_id, plan_active')
     .eq('user_id', user_id)
-    .order('created_at', { ascending: false } as any)
+    .order('created_at')
     .single();
 
     return customer;

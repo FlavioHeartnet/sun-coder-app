@@ -17,10 +17,11 @@ export async function SessionValidation(){
     user_id = user?.id || '';
     email = user?.email || '';
     if(await isAuthenticated()) isAuth = true;
+  
     const {  data: customer } = await supabaseAdmin
             .from('stripe_customers')
             .select('plan_active, subscription_id')
-            .eq('user_id', user_id).order('id', {ascending: false}).single();
+            .eq('user_id', user_id).order('id').single();
             if(customer?.subscription_id){
               subscriptionId = customer?.subscription_id;
               planActive = customer?.plan_active;
