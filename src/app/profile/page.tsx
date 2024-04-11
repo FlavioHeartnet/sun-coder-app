@@ -7,13 +7,22 @@ import Link from "next/link"
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
 
 export default async function ProfilePage() {
-    const response = await fetch('/api/auth', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const [isAuth] = await response.json();
+    
+    let isAuth = false;
+    try{
+        const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          isAuth = await response.json();
+          console.log(isAuth);
+    }catch(e){
+        console.log(e);
+        console.log("Error in fetching auth");
+    }
+    
     return (
             <Layout>
             <div className="container mx-auto grid items-center justify-center min-h-screen">

@@ -1,6 +1,5 @@
 'use client';
 
-import { loadStripe } from '@stripe/stripe-js';
 import { supabase } from '../../utils/supabaseClient';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
@@ -13,7 +12,7 @@ export default function CheckoutMonthly() {
   const [pending, setPending ] = useState(false);
   const handleCheckout = async() => {
     setPending(true);
-    const responseAuth = await fetch('/api/auth', {
+    const responseAuth = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +21,6 @@ export default function CheckoutMonthly() {
     const { user_id, isAuth } = await responseAuth.json();
 
     if (!isAuth) {
-      setPending(false);
       router.push('/api/auth/login?post_login_redirect_url=/monthlyCheckout');
       return;
     }

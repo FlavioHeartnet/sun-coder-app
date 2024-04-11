@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "../../../../utils/supabaseServer";
 import { SessionValidation } from "../../../../utils/sessionValidation";
 
 export async function POST() {
