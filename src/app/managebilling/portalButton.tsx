@@ -11,7 +11,7 @@ export default function PortalButton() {
   const handleClick = async () => {
     try {
       setPending(true);
-      const response = await fetch('/api/auth', {
+      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

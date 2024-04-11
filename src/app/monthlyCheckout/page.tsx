@@ -1,20 +1,23 @@
-//TODO: Verify if the the user has a plan and if this purchase is the same redirect to home, if it's a different product redirect to checkout!
 'use client';
+import ValidatingOrder from "@/components/validatingOrder";
 import { loadStripe } from "@stripe/stripe-js";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 export default function MontlyCheckout(){
   const handleCheckout = async() => {
-
+    const router = useRouter();
     const responseAuth = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const { user_id, email, isAuth } = await responseAuth.json();
-    console.log('id: '+user_id);
+    const { user_id, email, isAuth, activePriceId } = await responseAuth.json();
     if (isAuth) {
+      if(activePriceId == process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID){
+        toast.error('Você já tem esta assinatura!');
+        router.push('/');
+      }
       const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
       const stripe = await stripePromise;
       const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/checkout', {
@@ -22,23 +25,16 @@ export default function MontlyCheckout(){
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ priceId: 'price_1P0uQlE8qUMXaBnMcngZEGta', userId: user_id, email: email }),
+          body: JSON.stringify({ priceId: process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID, userId: user_id, email: email }),
         });
       const session = await response.json();
       await stripe?.redirectToCheckout({ sessionId: session.id });
+    }else{
+      router.push('/api/auth/login?post_login_redirect_url=/monthlyCheckout');
     }
   }
-  useEffect(() => {
-    toast.promise(
-      handleCheckout(),
-       {
-         loading: 'redirecionando...',
-         success: <b>Sucesso!</b>,
-         error: <b>Não foi possivel redirecionar para o checkout no momento!.</b>,
-       }
-     );
-  },[]);
+  handleCheckout();
     return(
-        <h1>Redirecionando para o checkout...</h1>
+      <ValidatingOrder/>
     ) 
 }
