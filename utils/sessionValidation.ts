@@ -8,27 +8,16 @@ export async function SessionValidation(){
     let planActive:boolean = false;
     let subscriptionId:string = '';
     let activePriceId:string = '';
-  const supabase = supabaseAdmin();
-    const isKindeAuth = true;
-    if(isKindeAuth){
-      const {
-        getUser,
-        isAuthenticated
-      } = getKindeServerSession();
-      const user = await getUser();
-      user_id = user?.id || '';
-      email = user?.email || '';
-      if(await isAuthenticated()) isAuth = true;
-    }else {
-        // !deprecated - but still here because the decision to use of kinde auth is not final
-        const { data: { user }, error: userError } = await supabase.auth.getUser();
-        if (!user || userError) {
-            throw 'supabase auth error';
-        }
-       [ user_id, email ] =  [user.id, user.email || ''];
-       if(user.id) isAuth = true;
-    }
-    const {  data: customer } = await supabase
+
+    const {
+      getUser,
+      isAuthenticated
+    } = getKindeServerSession();
+    const user = await getUser();
+    user_id = user?.id || '';
+    email = user?.email || '';
+    if(await isAuthenticated()) isAuth = true;
+    const {  data: customer } = await supabaseAdmin
             .from('stripe_customers')
             .select('plan_active, subscription_id')
             .eq('user_id', user_id).order('id', {ascending: false}).single();
