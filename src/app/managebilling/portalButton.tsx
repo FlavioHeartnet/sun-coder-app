@@ -1,13 +1,13 @@
 'use client';
 
-import { createPortalSession } from './portalAction';
-import { supabase } from '../../../utils/supabaseClient';
+import { createPortalSession, getBillingPortalData } from './portalAction';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { useState } from 'react';
 
 export default function PortalButton() {
   const [ pending, setPending ] = useState(false);
+  
   const handleClick = async () => {
     try {
       setPending(true);
@@ -22,13 +22,8 @@ export default function PortalButton() {
         setPending(false);
         throw 'Por favor, acesse sua conta para gerenciar sua fatura.';
       }
-      const { data: customer, error: fetchError } = await supabase
-      .from('stripe_customers')
-      .select('stripe_customer_id, plan_active')
-      .eq('user_id', user_id)
-      .order('created_at', { ascending: false } as any)
-      .single();
-    
+      const customer = await getBillingPortalData(user_id);
+      console.log(customer)
       if(customer?.plan_active){
         const { url } = await createPortalSession(customer?.stripe_customer_id);
         setPending(false);
@@ -42,6 +37,7 @@ export default function PortalButton() {
       console.error(error);
       toast.error('Configurações do Portal de Cobrança Incompletas.');
     }
+    setPending(false);
   }
 
   return (
