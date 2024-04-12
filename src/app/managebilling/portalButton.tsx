@@ -23,7 +23,6 @@ export default function PortalButton() {
         throw 'Por favor, acesse sua conta para gerenciar sua fatura.';
       }
       const customer = await getBillingPortalData(user_id);
-      console.log(customer)
       if(customer?.plan_active){
         const { url } = await createPortalSession(customer?.stripe_customer_id);
         setPending(false);

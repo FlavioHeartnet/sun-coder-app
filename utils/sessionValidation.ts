@@ -1,7 +1,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { supabaseAdmin } from "./supabaseServer";
 
-export async function SessionValidation(){
+export async function SessionValidation(isProduct = false){
     let  user_id = '' 
     let email= '';
     let isAuth:boolean = false;
@@ -17,8 +17,8 @@ export async function SessionValidation(){
     user_id = user?.id || '';
     email = user?.email || '';
     if(await isAuthenticated()) isAuth = true;
-  
-    const {  data: customer } = await supabaseAdmin
+    if(isProduct){
+      const {  data: customer } = await supabaseAdmin
             .from('stripe_customers')
             .select('plan_active, subscription_id')
             .eq('user_id', user_id).order('id').single();
@@ -40,7 +40,7 @@ export async function SessionValidation(){
               
             }
     
-
+          }
     return [ user_id, email, isAuth, planActive, subscriptionId, activePriceId];
      
 }

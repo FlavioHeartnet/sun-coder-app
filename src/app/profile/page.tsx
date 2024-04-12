@@ -8,7 +8,7 @@ import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
 
 export default async function ProfilePage() {
     
-    let isAuth = false;
+    let isAuth;
     try{
         const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
             method: "POST",

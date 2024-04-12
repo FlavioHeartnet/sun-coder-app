@@ -13,6 +13,7 @@ export default function YearlyCheckout(){
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({isProduct: true})
         });
         const { user_id, email, isAuth, activePriceId } = await responseAuth.json();
         if (isAuth) {

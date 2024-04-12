@@ -16,6 +16,7 @@ export default function CheckoutMonthly() {
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({isProduct: true})
     });
     const { isAuth, activePriceId } = await responseAuth.json();
 
