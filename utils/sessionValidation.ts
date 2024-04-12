@@ -4,6 +4,8 @@ import { supabaseAdmin } from "./supabaseServer";
 export async function SessionValidation(isProduct = false){
     let  user_id = '' 
     let email= '';
+    let firstname = '';
+    let lastname = '';
     let isAuth:boolean = false;
     let planActive:boolean = false;
     let subscriptionId:string = '';
@@ -16,6 +18,8 @@ export async function SessionValidation(isProduct = false){
     const user = await getUser();
     user_id = user?.id || '';
     email = user?.email || '';
+    firstname = user?.given_name || '';
+    lastname = user?.family_name || '';
     if(await isAuthenticated()) isAuth = true;
     if(isProduct){
       const {  data: customer } = await supabaseAdmin
@@ -41,6 +45,6 @@ export async function SessionValidation(isProduct = false){
             }
     
           }
-    return [ user_id, email, isAuth, planActive, subscriptionId, activePriceId];
+    return [ user_id, email, isAuth, planActive, subscriptionId, activePriceId, firstname, lastname];
      
 }

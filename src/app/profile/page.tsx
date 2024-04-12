@@ -1,4 +1,3 @@
-//TODO: isAuth is not working, probably because of a layout issue, fix it later
 import { Input } from "@/components/ui/input"
 import Layout from "../homeLayout"
 import { Label } from "@/components/ui/label"
@@ -7,22 +6,28 @@ import Link from "next/link"
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
 
 export default async function ProfilePage() {
-    
-    let isAuth;
+    let isAuth = false;
+    let email = '';
+    let firstname = '';
+    let lastname = '';
+
     try{
         const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
+            body: JSON.stringify({isProduct: true})
           });
-          isAuth = await response.json();
-          console.log(isAuth);
+        const resp = await response.json();
+        isAuth = resp.isAuth;
+        email = resp.email;
+        firstname = resp.firstname;
+        lastname = resp.lastname;
     }catch(e){
         console.log(e);
         console.log("Error in fetching auth");
     }
-    
     return (
             <Layout>
             <div className="container mx-auto grid items-center justify-center min-h-screen">
@@ -40,16 +45,16 @@ export default async function ProfilePage() {
                                 <div className="grid sm:grid-cols-2 gap-2">
                                     <div className="space-y-1.5">
                                         <Label htmlFor="first-name">Nome</Label>
-                                        <Input id="first-name" value="Jared" />
+                                        <Input id="first-name" value={firstname} />
                                     </div>
                                     <div className="space-y-1.5">
                                         <Label htmlFor="last-name">Sobrenome</Label>
-                                        <Input id="last-name" value="Palmer" />
+                                        <Input id="last-name" value={lastname} />
                                     </div>
                                 </div>
                                 <div className="space-y-1.5">
                                     <Label htmlFor="email">Email</Label>
-                                    <Input id="email" value="example@acme.inc" />
+                                    <Input id="email" value={email} />
                                 </div>
                             </div>
                         </div>
