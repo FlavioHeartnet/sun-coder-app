@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
+import { getProfileInfo } from "./profileActions"
 
 export default async function ProfilePage() {
     let isAuth = false;
@@ -11,23 +12,11 @@ export default async function ProfilePage() {
     let firstname = '';
     let lastname = '';
 
-    try{
-        const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({isProduct: true})
-          });
-        const resp = await response.json();
-        isAuth = resp.isAuth;
-        email = resp.email;
-        firstname = resp.firstname;
-        lastname = resp.lastname;
-    }catch(e){
-        console.log(e);
-        console.log("Error in fetching auth");
-    }
+    const resp = await getProfileInfo();
+    isAuth = resp.isAuth;
+    email = resp.email;
+    firstname = resp.firstname;
+    lastname = resp.lastname;
     return (
             <Layout>
             <div className="container mx-auto grid items-center justify-center min-h-screen">
@@ -59,7 +48,7 @@ export default async function ProfilePage() {
                             </div>
                         </div>
                     </div>
-                    <div className="grid gap-4 border border-gray-200 rounded-lg p-6 text-sm dark:border-gray-800 dark:border-gray-800">
+                    <div className="grid gap-4 border border-gray-200 rounded-lg p-6 text-sm dark:border-gray-800">
                         <div className="space-y-2">
                             <h2 className="text-lg font-semibold">Assinaturas e Produtos</h2>
                             <p className="text-sm text-gray-500 dark:text-gray-400">Gerencie suas assinaturas aqui:</p>
@@ -87,7 +76,7 @@ export default async function ProfilePage() {
                         </div>
                         <div className="flex justify-center">
                         <LoginLink
-                            className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm gap-1.5 sm:gap-1.5 md:gap-2.5 lg:gap-2.5 xl:gap-2.5 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
+                            className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm gap-1.5 sm:gap-1.5 md:gap-2.5 lg:gap-2.5 xl:gap-2.5 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-5 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
                         >
                             Login
                         </LoginLink>

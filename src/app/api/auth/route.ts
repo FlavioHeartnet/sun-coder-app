@@ -6,7 +6,7 @@ export async function POST(request: Request) {
         const { isProduct } = await request.json();
         const resp = await SessionValidation(isProduct);
         console.log(resp);
-        const [user_id, email, isAuth, planActive, subscriptionId, activePriceId, firstname, lastname] = resp;
+        const {user_id, email, isAuth, planActive, subscriptionId, activePriceId, firstname, lastname} = resp;
         //if(!isAuth) return NextResponse.json({ message: 'User not authenticated' }, { status: 401 });
 
         return NextResponse.json({ message: 'User token validated', user_id, email, isAuth,planActive, subscriptionId, activePriceId ,firstname, lastname  }, { status: 200 });

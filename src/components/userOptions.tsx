@@ -5,7 +5,7 @@ import LoggedOutButton from "./loggedOutButtons";
 
 export default async function UserOptions(){
 
-  const [ isAuth] = await SessionValidation();
+  const { isAuth } = await SessionValidation();
     return (
 
             <div className="ml-auto flex items-center gap-4">

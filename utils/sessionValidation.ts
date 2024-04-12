@@ -1,8 +1,17 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { supabaseAdmin } from "./supabaseServer";
-
-export async function SessionValidation(isProduct = false){
-    let  user_id = '' 
+export type SessionValidationType = {
+    user_id: string;
+    email: string;
+    firstname: string;
+    lastname: string;
+    isAuth: boolean;
+    planActive: boolean;
+    subscriptionId: string;
+    activePriceId: string;
+}
+export async function SessionValidation(isProduct = false): Promise<SessionValidationType>{
+    let user_id = '' 
     let email= '';
     let firstname = '';
     let lastname = '';
@@ -43,8 +52,16 @@ export async function SessionValidation(isProduct = false){
               }
               
             }
-    
-          }
-    return [ user_id, email, isAuth, planActive, subscriptionId, activePriceId, firstname, lastname];
+    }
+    return {
+        user_id,
+        email,
+        firstname,
+        lastname,
+        isAuth,
+        planActive,
+        subscriptionId,
+        activePriceId
+    }
      
 }

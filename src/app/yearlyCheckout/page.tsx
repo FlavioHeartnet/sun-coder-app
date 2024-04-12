@@ -6,8 +6,8 @@ import { JSX, SVGProps } from "react";
 import toast from "react-hot-toast";
 
 export default function YearlyCheckout(){
+  const router = useRouter();
     const handleCheckout = async() => {
-        const router = useRouter();
         const responseAuth = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
           method: "POST",
           headers: {
