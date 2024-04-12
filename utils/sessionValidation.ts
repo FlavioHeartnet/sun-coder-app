@@ -9,6 +9,7 @@ export type SessionValidationType = {
     planActive: boolean;
     subscriptionId: string;
     activePriceId: string;
+    profilePicture: string;
 }
 export async function SessionValidation(isProduct = false): Promise<SessionValidationType>{
     let user_id = '' 
@@ -19,6 +20,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
     let planActive:boolean = false;
     let subscriptionId:string = '';
     let activePriceId:string = '';
+    let profilePicture: string = '';
 
     const {
       getUser,
@@ -29,6 +31,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
     email = user?.email || '';
     firstname = user?.given_name || '';
     lastname = user?.family_name || '';
+    profilePicture = user?.picture || '';
     if(await isAuthenticated()) isAuth = true;
     if(isProduct){
       const {  data: customer } = await supabaseAdmin
@@ -61,7 +64,8 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
         isAuth,
         planActive,
         subscriptionId,
-        activePriceId
+        activePriceId,
+        profilePicture
     }
      
 }

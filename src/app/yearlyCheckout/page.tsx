@@ -4,18 +4,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/navigation";
 import { JSX, SVGProps } from "react";
 import toast from "react-hot-toast";
+import { getUserInfoAction } from "../actions/getUserInfoAction";
 
 export default function YearlyCheckout(){
   const router = useRouter();
     const handleCheckout = async() => {
-        const responseAuth = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({isProduct: true})
-        });
-        const { user_id, email, isAuth, activePriceId } = await responseAuth.json();
+        
+        const { user_id, email, isAuth, activePriceId } = await getUserInfoAction();
         if (isAuth) {
             if(activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID){
                 toast.error('Você já tem esta assinatura!');

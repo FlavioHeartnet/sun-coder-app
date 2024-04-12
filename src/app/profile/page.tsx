@@ -4,19 +4,22 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
-import { getProfileInfo } from "./profileActions"
+import { getUserInfoAction } from "../actions/getUserInfoAction"
+import Image from "next/image"
 
 export default async function ProfilePage() {
     let isAuth = false;
     let email = '';
     let firstname = '';
     let lastname = '';
+    let profilePicture = '';
 
-    const resp = await getProfileInfo();
+    const resp = await getUserInfoAction();
     isAuth = resp.isAuth;
     email = resp.email;
     firstname = resp.firstname;
     lastname = resp.lastname;
+    profilePicture = resp.profilePicture;
     return (
             <Layout>
             <div className="container mx-auto grid items-center justify-center min-h-screen">
@@ -28,6 +31,21 @@ export default async function ProfilePage() {
                         <div className="space-y-2">
                             <h1 className="text-3xl font-bold">Seu Perfil</h1>
                             <p className="text-gray-500 dark:text-gray-400">Atualize as informações do seu perfil aqui.</p>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                        <div className="w-15 h-15 relative rounded-full overflow-hidden">
+                            <img
+                                alt="Your profile picture"
+                                className="rounded-full object-cover"
+                                height="72"
+                                src={profilePicture}
+                                style={{
+                                    aspectRatio: "72/72",
+                                    objectFit: "cover",
+                                }}
+                                width="72"
+                            />
+                        </div>
                         </div>
                         <div className="space-y-6">
                             <div className="grid gap-2 text-sm">
