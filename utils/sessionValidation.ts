@@ -1,15 +1,23 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { supabaseAdmin } from "./supabaseServer";
+import { getPricebySub } from "./stripe";
 export type SessionValidationType = {
     user_id: string;
     email: string;
     firstname: string;
     lastname: string;
     isAuth: boolean;
-    planActive: boolean;
-    subscriptionId: string;
-    activePriceId: string;
+    
     profilePicture: string;
+    products: [
+      {
+        planActive: boolean;
+        subscriptionId: string;
+        activePriceId: string;
+        product: string;
+        description: string;
+      }
+    ];
 }
 export async function SessionValidation(isProduct = false): Promise<SessionValidationType>{
     let user_id = '' 
@@ -17,10 +25,8 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
     let firstname = '';
     let lastname = '';
     let isAuth:boolean = false;
-    let planActive:boolean = false;
-    let subscriptionId:string = '';
-    let activePriceId:string = '';
     let profilePicture: string = '';
+    let products = [];
 
     const {
       getUser,
@@ -32,27 +38,29 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
     firstname = user?.given_name || '';
     lastname = user?.family_name || '';
     profilePicture = user?.picture || '';
+    
     if(await isAuthenticated()) isAuth = true;
     if(isProduct){
-      const {  data: customer } = await supabaseAdmin
+      const {  data: customer, error } = await supabaseAdmin
             .from('stripe_customers')
             .select('plan_active, subscription_id')
-            .eq('user_id', user_id).order('id').single();
-            if(customer?.subscription_id){
-              subscriptionId = customer?.subscription_id;
-              planActive = customer?.plan_active;
-              const priceResp = await fetch('https://api.stripe.com/v1/subscriptions/'+subscriptionId, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": "Bearer "+process.env.STRIPE_SECRET_KEY
-                },
-              })
-              if(priceResp.ok){
-                const priceData = await priceResp.json();
-                activePriceId = priceData.items.data[0].price.id;
-                
-              }
+            .eq('user_id', user_id).eq('plan_active', true).order('id');
+            if(customer){
+              customer.forEach(async item => {
+                const subscriptionId = item?.subscription_id;
+                let activePriceId = '';
+                let product;
+                let description;
+                const planActive = item?.plan_active;
+                activePriceId = await getPricebySub(subscriptionId);
+                //TODO create a return for product
+                products.push({
+                  planActive,
+                  subscriptionId,
+                  activePriceId,
+                });
+              });
+              
               
             }
     }
