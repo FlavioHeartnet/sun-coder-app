@@ -4,6 +4,7 @@ import { createPortalSession, getBillingPortalData } from './portalAction';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { useState } from 'react';
+import { getUserInfoAction } from '../actions/getUserInfoAction';
 
 export default function PortalButton() {
   const [ pending, setPending ] = useState(false);
@@ -11,13 +12,7 @@ export default function PortalButton() {
   const handleClick = async () => {
     try {
       setPending(true);
-      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const { user_id } = await response.json();
+      const { user_id } = await getUserInfoAction(false);
       if (!user_id) {
         setPending(false);
         throw 'Por favor, acesse sua conta para gerenciar sua fatura.';

@@ -18,7 +18,7 @@ export const getBillingPortalData = async (user_id:string) => {
   const { data: customer, error: fetchError } = await supabaseAdmin
     .from('stripe_customers')
     .select('stripe_customer_id, plan_active')
-    .eq('user_id', user_id)
+    .eq('user_id', user_id).eq('plan_active', true)
     .order('created_at')
     .single();
 
