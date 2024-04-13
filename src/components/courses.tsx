@@ -84,7 +84,7 @@ export default function Courses(){
                 </div>
                 <div className="mx-auto">
                         <p className="text-xl font-bold text-gray-500 dark:text-gray-400">Quer aproveitar e levar logo tudo de uma vez?</p>
-                        <Link href='#' onClick={(event) => handleAnchorClick(event, 'assinar')} className="btn btn-accent text-xl mt-5 w-64">Saiba mais</Link>
+                        <Link href='#' onClick={(event) => handleAnchorClick(event, 'assinar')} className="btn btn-accent text-xl mt-5 w-64">Quero todos os cursos</Link>
                     </div>
                 </div>
             </section>

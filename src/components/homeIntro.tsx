@@ -28,7 +28,7 @@ export default function HomeIntro(){
             </p>
           </div>
           <div className="mx-auto w-full max-w-sm space-y-2">
-            <a onClick={(event) => handleAnchorClick(event, 'courses')} className="btn btn-accent text-xl mt-2 w-64">Bora começar!!</a>
+            <a onClick={(event) => handleAnchorClick(event, 'courses')} className="btn btn-accent text-xl mt-2 w-64">Saiba mais</a>
           </div>
         </div>
       </section> 
