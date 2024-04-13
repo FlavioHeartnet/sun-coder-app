@@ -1,5 +1,4 @@
 'use server';
-//TODO: Fix the behavior in DB -> this is returning multiple rows and it should get only one.
 import { stripe } from "../../../utils/stripe";
 import { supabaseAdmin } from "../../../utils/supabaseServer";
 
