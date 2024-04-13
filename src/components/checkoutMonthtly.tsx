@@ -1,7 +1,7 @@
 'use client';
 
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import { getUserInfoAction } from '@/app/actions/getUserInfoAction';
@@ -9,7 +9,18 @@ import { getUserInfoAction } from '@/app/actions/getUserInfoAction';
 
 export default function CheckoutMonthly() {
   const router = useRouter();
-  const [pending, setPending ] = useState(false);
+  const [textButton ,setText] = useState('Assinar Mensal');
+  const [pending, setPending ] = useState(true);
+
+  useEffect(() => {
+    getUserInfoAction().then(async (data) => {
+      if(data.products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
+        setText('Assinatura Ativa');
+      }else{
+        setPending(false);
+      }
+    });
+  }, []);
   const handleCheckout = async() => {
     setPending(true);
     
@@ -19,19 +30,13 @@ export default function CheckoutMonthly() {
       router.push('/api/auth/login?post_login_redirect_url=/monthlyCheckout');
       return;
     }
-
-    if(products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
-      toast.error('Você já possui essa assinatura ativa!');
-      setPending(false);
-      return;
-    }
     router.push('/monthlyCheckout');
   }
 
   return (
     
         <Button disabled={pending} onClick={handleCheckout} size="lg" variant="outline">
-                Assinar Mensal
+                {textButton}
         </Button>
    
   );

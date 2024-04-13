@@ -2,7 +2,7 @@
 
 'use client';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import { getUserInfoAction } from '@/app/actions/getUserInfoAction';
@@ -10,7 +10,19 @@ import { getUserInfoAction } from '@/app/actions/getUserInfoAction';
 
 export default function CheckoutYearly() {
   const router = useRouter();
-  const [pending, setPending ] = useState(false);
+  const [textButton ,setText] = useState('Assinar Anual');
+  const [pending, setPending ] = useState(true);
+
+  useEffect(()=>{
+    getUserInfoAction().then(async (data) => {
+      if(data.products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
+        setText('Assinatura Ativa');
+      }else{
+        setPending(false);
+      }
+    });
+  },[]);
+
   const handleCheckout = async() => {
     setPending(true);
     
@@ -32,7 +44,7 @@ export default function CheckoutYearly() {
   return (
     
         <Button disabled={pending} onClick={handleCheckout} size="lg">
-                Assinar Anual
+               {textButton}
         </Button>
    
   );
