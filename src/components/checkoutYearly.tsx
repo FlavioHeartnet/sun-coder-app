@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
+import { getUserInfoAction } from '@/app/actions/getUserInfoAction';
 
 
 export default function CheckoutYearly() {
@@ -12,21 +13,15 @@ export default function CheckoutYearly() {
   const [pending, setPending ] = useState(false);
   const handleCheckout = async() => {
     setPending(true);
-    const responseAuth = await fetch(process.env.NEXT_PUBLIC_BASE_URL_API+'/api/auth', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({isProduct: true})
-    });
-    const { isAuth, activePriceId } = await responseAuth.json();
+    
+    const { isAuth, products } = await getUserInfoAction();
 
     if (!isAuth) {
       router.push('/api/auth/login?post_login_redirect_url=/yearlyCheckout');
       return;
     }
 
-    if(process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID == activePriceId){
+    if(products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
       toast.error('Você já possui essa assinatura ativa!');
       setPending(false);
       return;
