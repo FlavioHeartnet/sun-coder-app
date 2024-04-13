@@ -8,9 +8,9 @@ export default function MontlyCheckout(){
   const router = useRouter();
   const handleCheckout = async() => {
     
-    const { user_id, email, isAuth, activePriceId } = await getUserInfoAction();
+    const { user_id, email, isAuth, products } = await getUserInfoAction();
     if (isAuth) {
-      if(activePriceId == process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID){
+      if(products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
         toast.error('Você já tem esta assinatura!');
         router.push('/');
       }

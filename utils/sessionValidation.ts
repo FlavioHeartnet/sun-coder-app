@@ -1,23 +1,21 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { supabaseAdmin } from "./supabaseServer";
-import { getPricebySub } from "./stripe";
+import { getPricebySub, getProductbyId } from "./stripe";
+export type UserProduct = {
+  planActive: boolean;
+  subscriptionId: string;
+  activePriceId: string;
+  product: string;
+  description: string;
+}
 export type SessionValidationType = {
     user_id: string;
     email: string;
     firstname: string;
     lastname: string;
     isAuth: boolean;
-    
     profilePicture: string;
-    products: [
-      {
-        planActive: boolean;
-        subscriptionId: string;
-        activePriceId: string;
-        product: string;
-        description: string;
-      }
-    ];
+    products: UserProduct[];
 }
 export async function SessionValidation(isProduct = false): Promise<SessionValidationType>{
     let user_id = '' 
@@ -26,7 +24,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
     let lastname = '';
     let isAuth:boolean = false;
     let profilePicture: string = '';
-    let products = [];
+    let products: UserProduct[] = [];
 
     const {
       getUser,
@@ -46,22 +44,20 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
             .select('plan_active, subscription_id')
             .eq('user_id', user_id).eq('plan_active', true).order('id');
             if(customer){
-              customer.forEach(async item => {
-                const subscriptionId = item?.subscription_id;
-                let activePriceId = '';
-                let product;
-                let description;
-                const planActive = item?.plan_active;
-                activePriceId = await getPricebySub(subscriptionId);
-                //TODO create a return for product
-                products.push({
-                  planActive,
-                  subscriptionId,
-                  activePriceId,
-                });
+                  const productsPromise = customer.map(async item => {
+                  const subscriptionId = item?.subscription_id;
+                  const planActive = item?.plan_active;
+                  const priceInfo = await getPricebySub(subscriptionId);
+                  const productInfo = await getProductbyId(priceInfo?.productId);
+                  return {
+                    planActive,
+                    subscriptionId,
+                    activePriceId: priceInfo?.priceId,
+                    product: productInfo.name,
+                    description: productInfo.description,
+                  } as UserProduct;
               });
-              
-              
+              products = await Promise.all(productsPromise);
             }
     }
     return {
@@ -70,10 +66,8 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
         firstname,
         lastname,
         isAuth,
-        planActive,
-        subscriptionId,
-        activePriceId,
-        profilePicture
-    }
+        profilePicture,
+        products
+    } as SessionValidationType;
      
 }

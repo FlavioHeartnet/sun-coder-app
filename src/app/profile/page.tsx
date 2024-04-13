@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
 import { getUserInfoAction } from "../actions/getUserInfoAction"
-import Image from "next/image"
+import { UserProduct } from "../../../utils/sessionValidation"
 
 export default async function ProfilePage() {
     let isAuth = false;
@@ -13,13 +13,17 @@ export default async function ProfilePage() {
     let firstname = '';
     let lastname = '';
     let profilePicture = '';
-
     const resp = await getUserInfoAction();
     isAuth = resp.isAuth;
     email = resp.email;
     firstname = resp.firstname;
     lastname = resp.lastname;
     profilePicture = resp.profilePicture;
+    const products: UserProduct[] = resp.products;
+    console.log(products);
+    const activeProducts = products.map((product, index) => {
+        return <li key={index} className="text-xl mt-5">{ product.product }</li>;
+    });
     return (
             <Layout>
             <div className="container mx-auto grid items-center justify-center min-h-screen">
@@ -70,6 +74,11 @@ export default async function ProfilePage() {
                         <div className="space-y-2">
                             <h2 className="text-lg font-semibold">Assinaturas e Produtos</h2>
                             <p className="text-sm text-gray-500 dark:text-gray-400">Gerencie suas assinaturas aqui:</p>
+                            <div>
+                                <ul>
+                                    {activeProducts}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

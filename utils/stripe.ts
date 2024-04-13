@@ -17,8 +17,11 @@ export async function getProductbyId(id: string){
                 description: product.description,
             } 
 }
-
-export async function getPricebySub(sub_id: string){
+export type PriceInfoType = {
+    priceId: string,
+    productId: string,
+}
+export async function getPricebySub(sub_id: string): Promise<PriceInfoType>{
     const priceResp = await fetch('https://api.stripe.com/v1/subscriptions/'+sub_id, {
         method: "POST",
         headers: {
@@ -30,9 +33,13 @@ export async function getPricebySub(sub_id: string){
       if(priceResp.status === 200){
         const priceData = await priceResp.json();
         return {
-            priceId: priceData.items.data[0].price.id,
-            productId: priceData.items.data[0].price.product,
+            priceId: priceData.items.data[0].price.id || '',
+            productId: priceData.items.data[0].price.product || '',
+            
         }
       }
-      return
+      return  {
+        priceId: '',
+        productId: '',
+    };
 }
