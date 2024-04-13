@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from './../../../../utils/stripe';
+import { cancelSubscription, stripe } from './../../../../utils/stripe';
 import { supabaseAdmin } from './../../../../utils/supabaseServer';
 import Stripe from 'stripe';
 
@@ -19,6 +19,20 @@ export async function POST(request: NextRequest) {
       if (event.type === 'checkout.session.completed') {
         const session: Stripe.Checkout.Session = event.data.object;
         const userId = session.metadata?.user_id;
+        console.log("Update: "+session.subscription);
+        //Get all active subs and cancel them
+        const { data: customer, error: fetchError } = await supabaseAdmin
+        .from('stripe_customers')
+        .select('subscription_id, plan_active')
+        .eq('user_id', userId).eq('plan_active', true)
+        .order('created_at');
+        if(!fetchError){
+          customer.forEach(async i => {
+              if(!await cancelSubscription(i.subscription_id)){
+                  console.log("Error cancelling subscription: " +i.subscription_id);
+              }
+          })
+        }
         // Create or update the stripe_customer_id in the stripe_customers table
         const { error } = await supabaseAdmin
         .from('stripe_customers')
@@ -41,6 +55,7 @@ export async function POST(request: NextRequest) {
       if (event.type === 'customer.subscription.updated') {
         const subscription: Stripe.Subscription = event.data.object;
             // Update the plan_expires field in the stripe_customers table
+            console.log("Update: "+subscription.id);
         const { error } = await supabaseAdmin
             .from('stripe_customers')
             .update({ plan_expires: subscription.cancel_at })

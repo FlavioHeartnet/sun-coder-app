@@ -43,3 +43,15 @@ export async function getPricebySub(sub_id: string): Promise<PriceInfoType>{
         productId: '',
     };
 }
+
+export async function cancelSubscription(sub_id: string){
+    const resp = await fetch('https://api.stripe.com/v1/subscriptions/'+sub_id, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+process.env.STRIPE_SECRET_KEY
+        },
+      })
+
+      return resp.status === 200;
+}
