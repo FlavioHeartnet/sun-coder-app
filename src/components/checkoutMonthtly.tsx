@@ -24,7 +24,7 @@ export default function CheckoutMonthly() {
   const handleCheckout = async() => {
     setPending(true);
     
-    const { isAuth, products } = await getUserInfoAction();
+    const { isAuth } = await getUserInfoAction();
 
     if (!isAuth) {
       router.push('/api/auth/login?post_login_redirect_url=/monthlyCheckout');
