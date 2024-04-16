@@ -8,6 +8,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' 
       - name: Executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -17,15 +22,5 @@ jobs:
           script: |
             cd /var/www/suncoder-app/sun-coder-app/
             git pull origin master
-
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'      
-
-      - name: Build
-        run: npm run build
-
-      - name: Run
-        run: npm run start  
+            npm run build
+            npm run start  
