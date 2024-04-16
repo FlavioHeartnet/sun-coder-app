@@ -16,10 +16,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/suncoder-app/sun-coder-app/
-            git pull
-
-      - name: Build
-        run: docker build -t suncoder .
-
-      - name: Run
-        run: docker run -p 3000:3000 suncoder
+            git pull origin master
+            npm run build
+            npm run start
