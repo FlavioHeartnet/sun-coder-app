@@ -17,6 +17,13 @@ jobs:
           script: |
             cd /var/www/suncoder-app/sun-coder-app/
             git pull origin master
-            npm install npm@latest -g
-            npm run build
-            npm run start
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+            export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+            nvm install --lts
+            nvm use --lts
+
+      - name: Build
+        run: npm run build
+
+      - name: Run
+        run: npm run start  
