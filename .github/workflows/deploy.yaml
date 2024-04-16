@@ -17,6 +17,6 @@ jobs:
           script: |
             cd /var/www/suncoder-app/sun-coder-app/
             git pull origin master
-            nvm use --lts
+            npm install npm@latest -g
             npm run build
             npm run start
