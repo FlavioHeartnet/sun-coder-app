@@ -22,6 +22,4 @@ jobs:
           script: |
             cd /var/www/suncoder-app/sun-coder-app/
             git pull origin master
-            sudo nvm use --lts
-            npm run build
-            npm run start  
+ 
