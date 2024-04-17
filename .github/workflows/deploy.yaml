@@ -1,25 +1,30 @@
-name: Build & Deploy
+name: ci
+
 on:
   push:
     branches:
-      - master
+      - 'main'
 
 jobs:
-  deploy:
+  docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          node-version: '20.x' 
-      - name: Executing remote ssh commands
-        uses: appleboy/ssh-action@v1.0.3
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /var/www/suncoder-app/sun-coder-app/
-            git pull origin master
- 
+          push: true
+          repoitory: ${{ secrets.DOCKERHUB_USERNAME }}/suncoder
+          tags: ${{github.sha}}, latest
