@@ -13,9 +13,9 @@ jobs:
         name: Inject .env
         run: | 
           touch .env.local
-          echo SUPABASE_SECRET_KEY=${{ secrets.SUPABASE_SECRET_KEY }} >> .env
-          echo NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }} >> .env
-
+          echo SUPABASE_SECRET_KEY=${{ secrets.SUPABASE_SECRET_KEY }} >> .env.local
+          echo NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }} >> .env.local
+          cat .env.local
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
