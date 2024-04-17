@@ -9,12 +9,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - 
-        name: Inject .env
-        run: | 
-          touch .env
-          echo "${{ secrets.ENV_FILE }}" > .env
-          cat .env
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -30,6 +24,11 @@ jobs:
       -
         name: Build and push
         uses: docker/build-push-action@v5
+        env:
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
         with:
           push: true
           repoitory: ${{ secrets.DOCKERHUB_USERNAME }}/suncoder
