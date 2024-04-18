@@ -8,14 +8,12 @@
 
 ARG NODE_VERSION=20.11.0
 
+
+
 ################################################################################
 # Use node image for base image for all stages.
 FROM node:${NODE_VERSION}-alpine as base
-#load envs for the pipeline populate it
-RUN --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_URL 
-RUN --mount=type=secret,id=SUPABASE_SECRET_KEY
-RUN --mount=type=secret,id=github_token \
-  cat /run/secrets/
+
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
 
@@ -36,6 +34,10 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 ################################################################################
 # Create a stage for building the application.
 FROM deps as build
+ARG SUPABASE_URL
+ARG SUPABASE_SECRET_KEY
+ENV SUPABASE_URL=${SUPABASE_URL}    
+ENV SUPABASE_SECRET_KEY=${SUPABASE_SECRET_KEY}
 
 # Download additional development dependencies before building, as some projects require
 # "devDependencies" to be installed to build. If you don't need this, remove this step.

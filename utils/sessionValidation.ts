@@ -39,7 +39,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
     
     if(await isAuthenticated()) isAuth = true;
     if(isProduct){
-      const {  data: customer, error } = await supabaseAdmin
+      const {  data: customer, error } = await supabaseAdmin()
             .from('stripe_customers')
             .select('plan_active, subscription_id')
             .eq('user_id', user_id).eq('plan_active', true).order('id');

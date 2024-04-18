@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         const userId = session.metadata?.user_id;
         console.log("Update: "+session.subscription);
         //Get all active subs and cancel them
-        const { data: customer, error: fetchError } = await supabaseAdmin
+        const { data: customer, error: fetchError } = await supabaseAdmin()
         .from('stripe_customers')
         .select('subscription_id, plan_active')
         .eq('user_id', userId).eq('plan_active', true)
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
           })
         }
         // Create or update the stripe_customer_id in the stripe_customers table
-        const { error } = await supabaseAdmin
+        const { error } = await supabaseAdmin()
         .from('stripe_customers')
         .upsert({ 
             user_id: userId, 
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
         const subscription: Stripe.Subscription = event.data.object;
             // Update the plan_expires field in the stripe_customers table
             console.log("Update: "+subscription.id);
-        const { error } = await supabaseAdmin
+        const { error } = await supabaseAdmin()
             .from('stripe_customers')
             .update({ plan_expires: subscription.cancel_at })
             .eq('subscription_id', subscription.id);
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       if (event.type === 'customer.subscription.deleted') {
         const subscription = event.data.object;
 
-        const { error } = await supabaseAdmin
+        const { error } = await supabaseAdmin()
         .from('stripe_customers')
         .update({ plan_active: false, subscription_id: null })
         .eq('subscription_id', subscription.id);
