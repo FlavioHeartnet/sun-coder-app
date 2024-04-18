@@ -11,8 +11,8 @@ ARG NODE_VERSION=20.11.0
 ################################################################################
 # Use node image for base image for all stages.
 FROM node:${NODE_VERSION}-alpine as base
-RUN --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_URL \
-RUN --mount=type=secret,id=SUPABASE_SECRET_KEY \
+RUN --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_URL 
+RUN --mount=type=secret,id=SUPABASE_SECRET_KEY
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
 
