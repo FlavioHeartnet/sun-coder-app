@@ -12,10 +12,10 @@ ARG NODE_VERSION=20.11.0
 # Use node image for base image for all stages.
 FROM node:${NODE_VERSION}-alpine as base
 #load envs for the pipeline populate it
-RUN --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_URL \ cat /run/secrets/NEXT_PUBLIC_SUPABASE_URL
-RUN --mount=type=secret,id=SUPABASE_SECRET_KEY \ cat /run/secrets/SUPABASE_SECRET_KEY
+RUN --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_URL 
+RUN --mount=type=secret,id=SUPABASE_SECRET_KEY
 RUN --mount=type=secret,id=github_token \
-  cat /run/secrets/github_token
+  cat /run/secrets/
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
 
