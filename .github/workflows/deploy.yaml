@@ -40,5 +40,4 @@ jobs:
           SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
         with:
           push: true
-          repoitory: ${{ secrets.DOCKERHUB_USERNAME }}/suncoder
           tags: ${{github.sha}}, latest
