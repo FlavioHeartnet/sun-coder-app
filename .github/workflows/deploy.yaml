@@ -51,6 +51,10 @@ jobs:
             kustomize edit set image suncoder-app=$DOCKER_REPOSITORY/suncoder:$GITHUB_RUN_NUMBER
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
-            git checkout -b tag_$GITHUB_RUN_NUMBER
             git commit -am "Bump docker version" 
-            git push https://github.com/FlavioHeartnet/apps-k8s.git tag_$GITHUB_RUN_NUMBER
+        
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: FlavioHeartnet/apps-k8s 
