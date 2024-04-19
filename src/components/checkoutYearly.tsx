@@ -15,6 +15,8 @@ export default function CheckoutYearly() {
 
   useEffect(()=>{
     getUserInfoAction().then(async (data) => {
+      console.log(data);
+      console.log(process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID);
       if(data.products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
         setText('Assinatura Ativa');
       }else{
