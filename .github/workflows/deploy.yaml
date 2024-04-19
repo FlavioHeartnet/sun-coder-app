@@ -31,13 +31,19 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - 
+        name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0.3
+        with:
+          envkey_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+          envkey_SUPABASE_SECRET_KEY: ${{secrets.SUPABASE_SECRET_KEY}}
+          file_name: .env.local
+          fail_on_empty: false
+          sort_keys: false
       -
         name: Build 
-        run: docker build -t $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER . 
-        env: 
-          SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
-          SUPABASE_SECRET_KEY: ${{secrets.SUPABASE_SECRET_KEY}}
-          
+        run:  docker build -t $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER . 
+
       - name: Push Image to Docker Hub
         run: docker push $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER
         
