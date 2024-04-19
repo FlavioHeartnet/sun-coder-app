@@ -4,8 +4,10 @@ import Courses from "../components/courses";
 import { PriceList } from "@/components/pricelist";
 import HomeIntro from "@/components/homeIntro";
 
-export default function HomePage(){
-  
+
+
+export default async function HomePage(){
+
     return (
       <Layout>
         <HomeIntro/>

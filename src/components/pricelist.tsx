@@ -5,8 +5,14 @@
 import { CardContent, Card } from "@/components/ui/card"
 import CheckoutMonthtly from "./checkoutMonthtly"
 import CheckoutYearly from "./checkoutYearly"
-
-export function PriceList() {
+import { SessionValidationType } from "../../utils/sessionValidation"
+import { getUserInfoAction } from "@/app/actions/getUserInfoAction";
+async function getData(): Promise<SessionValidationType>{
+  const data = await getUserInfoAction();
+  return data; 
+}
+export async function PriceList() {
+  const userInfos = await getData();
   return (
     <div id="assinar" className="w-full py-12 flex justify-center min-h-screen">
       <div className="container grid gap-6 px-4 md:px-6 lg:grid-cols-2 xl:gap-12">
@@ -28,7 +34,7 @@ export function PriceList() {
               <div className="grid gap-0.5 text-sm leading-loose">
                 <p className="text-base font-medium tracking-wide sm:text-lg">Cobrado mensalmente</p>
               </div>
-              <CheckoutMonthtly/>
+              <CheckoutMonthtly products={userInfos.products}/>
             </CardContent>
           </Card>
           <Card>
@@ -40,7 +46,7 @@ export function PriceList() {
               <div className="grid gap-0.5 text-sm leading-loose">
                 <p className="text-base font-medium tracking-wide">Economize R$89 com o plano anual</p>
               </div>
-              <CheckoutYearly/>
+              <CheckoutYearly products={userInfos.products} />
             </CardContent>
           </Card>
         </div>

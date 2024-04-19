@@ -6,24 +6,24 @@ import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import { getUserInfoAction } from '@/app/actions/getUserInfoAction';
+import { UserProduct } from '../../utils/sessionValidation';
 
 
-export default function CheckoutYearly() {
+export default function CheckoutYearly(data: { products:UserProduct[] }){
   const router = useRouter();
   const [textButton ,setText] = useState('Assinar Anual');
   const [pending, setPending ] = useState(true);
-
-  useEffect(()=>{
-     getUserInfoAction().then(async (data) => {
-      console.log(data);
-      console.log(process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID);
+  
+  useEffect(() => {
+    if(data){
       if(data.products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
         setText('Assinatura Ativa');
       }else{
         setPending(false);
       }
-    });
-  },[pending]);
+    }
+  }, [])
+  
 
   const handleCheckout = async() => {
     setPending(true);
