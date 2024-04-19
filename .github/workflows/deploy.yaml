@@ -44,7 +44,7 @@ jobs:
             DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            git clone https://user:$GITHUB_TOKEN@github.com/owner/apps-k8s
+            git clone https://github.com/FlavioHeartnet/apps-k8s.git
             cd suncoder-k8s
             kustomize edit set image suncoder-app=$DOCKER_REPOSITORY/suncoder:$GITHUB_RUN_NUMBER
              
