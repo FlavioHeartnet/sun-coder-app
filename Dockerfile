@@ -34,10 +34,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 ################################################################################
 # Create a stage for building the application.
 FROM deps as build
-ARG SUPABASE_URL
-ARG SUPABASE_SECRET_KEY
-ENV SUPABASE_URL=${SUPABASE_URL}    
-ENV SUPABASE_SECRET_KEY=${SUPABASE_SECRET_KEY}
+
 
 # Download additional development dependencies before building, as some projects require
 # "devDependencies" to be installed to build. If you don't need this, remove this step.

@@ -14,7 +14,7 @@ services:
     environment:
       NODE_ENV: production
     env_file:
-      - path: ./.env.local
+      - path: /.env.local
         required: true
     ports:
       - 3000:3000
