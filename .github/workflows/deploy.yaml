@@ -53,4 +53,4 @@ jobs:
             git config --local user.name "GitHub Action"
             git checkout -b tag_$GITHUB_RUN_NUMBER
             git commit -am "Bump docker version" 
-            git push origin tag_$GITHUB_RUN_NUMBER
+            git push https://github.com/FlavioHeartnet/apps-k8s.git tag_$GITHUB_RUN_NUMBER
