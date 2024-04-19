@@ -7,6 +7,8 @@ on:
 
 jobs:
   pipeline:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     env:
       DOCKER_REPOSITORY: flavioheartnet # name of Docker Hub ID
