@@ -14,7 +14,7 @@ export default function CheckoutYearly() {
   const [pending, setPending ] = useState(true);
 
   useEffect(()=>{
-    getUserInfoAction().then(async (data) => {
+     getUserInfoAction().then(async (data) => {
       console.log(data);
       console.log(process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID);
       if(data.products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
@@ -23,7 +23,7 @@ export default function CheckoutYearly() {
         setPending(false);
       }
     });
-  },[]);
+  },[pending]);
 
   const handleCheckout = async() => {
     setPending(true);
