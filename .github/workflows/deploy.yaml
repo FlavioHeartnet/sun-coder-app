@@ -14,8 +14,6 @@ jobs:
       DOCKER_REPOSITORY: flavioheartnet # name of Docker Hub ID
       IMAGE_NAME: suncoder
       IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
-      SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
-      SUPABASE_SECRET_KEY: ${{secrets.SUPABASE_SECRET_KEY}}
 
     steps:
       - name: Checkout
@@ -34,11 +32,15 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       -
-        name: Build 
-        run: docker build -t $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER . 
-
-      - name: Push Image to Docker Hub
-        run: docker push $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER 
+        env: 
+          SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+          SUPABASE_SECRET_KEY: ${{secrets.SUPABASE_SECRET_KEY}}
+              
 
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
