@@ -2,7 +2,7 @@
 import ValidatingOrder from "@/components/validatingOrder";
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/navigation";
-import { JSX, SVGProps, useEffect } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { getUserInfoAction } from "../actions/getUserInfoAction";
 
