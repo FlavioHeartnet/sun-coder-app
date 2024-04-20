@@ -15,10 +15,7 @@ jobs:
       IMAGE_NAME: suncoder
       IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
+    steps:        
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -54,12 +51,21 @@ jobs:
         with: 
           kustomize-version: "3.6.1"
 
+      - name: Checkout new repo
+        uses: actions/checkout@v4
+        with: 
+          path: 'suncoder-k8s'
+          ref: 'master'
+          repository: FlavioHeartnet/apps-k8s
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
+
+
       - name: Update Kubernetes resources
         env:
             DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
-            git clone https://github.com/FlavioHeartnet/apps-k8s.git
-            cd apps-k8s/suncoder-k8s
             kustomize edit set image suncoder-app=$DOCKER_REPOSITORY/suncoder:$GITHUB_RUN_NUMBER
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
