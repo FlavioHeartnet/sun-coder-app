@@ -71,7 +71,7 @@ jobs:
           git clone https://github.com/FlavioHeartnet/apps-k8s.git
           cd apps-k8s/suncoder-k8s
           kustomize edit set image suncoder-app=$DOCKER_REPOSITORY/suncoder:$GITHUB_RUN_NUMBER
-          git config --local user.email "action@github.com"
+          git config --local user.email "flavionogueirabarros@gmail.com"
           git config --local user.name "GitHub Action"
           git commit -am "Bump docker version" 
           git push -u https://github.com/FlavioHeartnet/apps-k8s.git master
