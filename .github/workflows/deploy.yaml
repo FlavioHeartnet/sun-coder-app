@@ -15,7 +15,9 @@ jobs:
       IMAGE_NAME: suncoder
       IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
 
-    steps:        
+    steps:  
+      - name: Checkout
+        uses: actions/checkout@v4      
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
