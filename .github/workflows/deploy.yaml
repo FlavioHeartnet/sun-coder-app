@@ -53,16 +53,6 @@ jobs:
         with: 
           kustomize-version: "3.6.1"
 
-      # - name: Checkout new repo
-      #   uses: actions/checkout@v4
-      #   with: 
-      #     path: 'suncoder-k8s'
-      #     ref: 'master'
-      #     repository: FlavioHeartnet/apps-k8s
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     persist-credentials: true
-      #     fetch-depth: 0
-      #     ssh-key: ${{secrets.SSH_KEY}}
       - name: Setup SSH
         uses: MrSquaare/ssh-setup-action@v1
         with:
