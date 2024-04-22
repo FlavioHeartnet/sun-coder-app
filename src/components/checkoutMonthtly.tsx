@@ -19,7 +19,7 @@ export default function CheckoutMonthly(data: { products:UserProduct[] }) {
       }else{
         setPending(false);
       }
-  }, []);
+  }, [data]);
   const handleCheckout = async() => {
     setPending(true);
     

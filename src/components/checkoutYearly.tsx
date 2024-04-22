@@ -22,7 +22,7 @@ export default function CheckoutYearly(data: { products:UserProduct[] }){
         setPending(false);
       }
     }
-  }, [])
+  }, [data])
   
 
   const handleCheckout = async() => {
