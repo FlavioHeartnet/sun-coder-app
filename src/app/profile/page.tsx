@@ -6,6 +6,7 @@ import Link from "next/link"
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
 import { getUserInfoAction } from "../actions/getUserInfoAction"
 import { UserProduct } from "../../../utils/sessionValidation"
+import Image from "next/image"
 
 export default async function ProfilePage() {
     let isAuth = false;
@@ -37,7 +38,7 @@ export default async function ProfilePage() {
                         </div>
                         <div className="flex items-center space-x-4">
                         <div className="w-15 h-15 relative rounded-full overflow-hidden">
-                            <img
+                            <Image
                                 alt="Your profile picture"
                                 className="rounded-full object-cover"
                                 height="72"
