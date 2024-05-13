@@ -24,7 +24,7 @@ export default function HomeIntro(){
           <section className="w-full h-full py-12 md:py-24 lg:py-32 xl:py-48 absolute z-10">
           <div className="grid h-full items-center justify-center gap-6 px-4 text-center md:px-6 lg:gap-10">
             <div className="space-y-3">
-              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+              <h1 className="text-white text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
                 A plataforma essencial para aprender<br/> desenvolvimento web
               </h1>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
