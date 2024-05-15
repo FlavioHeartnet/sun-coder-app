@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+
 import { Link } from "./ui/link";
 //TODO: if the user already have a sub, change it to welcome texts -> tbd
 export default function CtaProSub(){

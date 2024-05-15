@@ -1,8 +1,34 @@
-import Image from "next/image";
-import { Button } from "./ui/button";
-import {Link} from "./ui/link";
+import CourseItem from "./course-item";
 
-
+const courses = [
+    {
+        text: 'Mastering JavaScript: From Beginner to Advanced',
+        price: '$49.99',
+        image: '/placeholder.svg',
+        isPlanActive: false,
+    },
+    {
+        text: 'JavaScript for Beginners',
+        price: '$59.99',
+        image: '/placeholder.svg',
+        isPlanActive: false,
+    },
+    {
+        text: 'React.js for Web Development',
+        price: '$79.99',
+        image: '/placeholder.svg',
+        isPlanActive: false,
+    },
+    {
+        text: 'Full-Stack Development with Node.js',
+        price: '$99.99',
+        image: '/placeholder.svg',
+        isPlanActive: false,
+    },
+];
+const coursesComponents = courses.map((a, i) => {
+    return <CourseItem key={i} title={a.text} image={a.image} price={a.price} isPlanActive={a.isPlanActive} />
+})
 //TODO: Add a condition to then the user buy a Premium subs, the button turn to 'watch' and the price disapear
 export default function PopularCourses(){
     return(
@@ -10,70 +36,7 @@ export default function PopularCourses(){
           <div className="container mx-auto">
             <h2 className="text-2xl font-bold mb-6">Popular Courses</h2>
             <div className="flex gap-4 space-x-4 overflow-x-auto">
-              <div className="flex-shrink-0 w-64">
-                <Image
-                  alt="Course Image"
-                  className="rounded-lg mb-2"
-                  height={144}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "256/144",
-                    objectFit: "cover",
-                  }}
-                  width={256}
-                />
-                <h3 className="text-lg font-bold mb-1">Mastering JavaScript: From Beginner to Advanced</h3>
-                <p className="text-gray-400 mb-2">$49.99</p>
-                <Link variant='teal' href='/courses/javascript'>Enroll</Link>
-              </div>
-              <div className="flex-shrink-0 w-64">
-                <Image
-                  alt="Course Image"
-                  className="rounded-lg mb-2"
-                  height={144}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "256/144",
-                    objectFit: "cover",
-                  }}
-                  width={256}
-                />
-                <h3 className="text-lg font-bold mb-1">JavaScript for Beginners</h3>
-                <p className="text-gray-400 mb-2">$59.99</p>
-                <Link variant="teal">Enroll</Link>
-              </div>
-              <div className="flex-shrink-0 w-64">
-                <Image
-                  alt="Course Image"
-                  className="rounded-lg mb-2"
-                  height={144}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "256/144",
-                    objectFit: "cover",
-                  }}
-                  width={256}
-                />
-                <h3 className="text-lg font-bold mb-1">React.js for Web Development</h3>
-                <p className="text-gray-400 mb-2">$79.99</p>
-                <Link variant="teal">Enroll</Link>
-              </div>
-              <div className="flex-shrink-0 w-64">
-                <Image
-                  alt="Course Image"
-                  className="rounded-lg mb-2"
-                  height={144}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "256/144",
-                    objectFit: "cover",
-                  }}
-                  width={256}
-                />
-                <h3 className="text-lg font-bold mb-1">Full-Stack Development with Node.js</h3>
-                <p className="text-gray-400 mb-2">$99.99</p>
-                <Link variant="teal">Enroll</Link>
-              </div>
+             {coursesComponents} 
             </div>
           </div>
         </section>
