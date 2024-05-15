@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { Link } from "./ui/link";
 //TODO: Add a condition to then the user buy a Premium subs, the button turn to 'watch' and the price disapear
 export default function AllCourses(){
     return (
@@ -22,7 +23,7 @@ export default function AllCourses(){
                   <div className="p-4">
                     <h3 className="text-lg font-bold mb-2">Introduction to HTML and CSS</h3>
                     <p className="text-gray-400 mb-4">$49.99</p>
-                    <Button variant="teal">Enroll</Button>
+                    <Link variant="teal">Enroll</Link>
                   </div>
                 </div>
                 <div className="bg-[#222222] rounded-lg overflow-hidden">
@@ -40,7 +41,7 @@ export default function AllCourses(){
                   <div className="p-4">
                     <h3 className="text-lg font-bold mb-2">JavaScript for Beginners</h3>
                     <p className="text-gray-400 mb-4">$59.99</p>
-                    <Button variant="teal">Enroll</Button>
+                    <Link variant="teal">Enroll</Link>
                   </div>
                 </div>
                 <div className="bg-[#222222] rounded-lg overflow-hidden">
@@ -58,7 +59,7 @@ export default function AllCourses(){
                   <div className="p-4">
                     <h3 className="text-lg font-bold mb-2">React.js for Web Development</h3>
                     <p className="text-gray-400 mb-4">$79.99</p>
-                    <Button variant="teal">Enroll</Button>
+                    <Link variant="teal">Enroll</Link>
                   </div>
                 </div>
                 <div className="bg-[#222222] rounded-lg overflow-hidden">
@@ -76,7 +77,7 @@ export default function AllCourses(){
                   <div className="p-4">
                     <h3 className="text-lg font-bold mb-2">Full-Stack Development with Node.js</h3>
                     <p className="text-gray-400 mb-4">$99.99</p>
-                    <Button variant="teal">Enroll</Button>
+                    <Link variant="teal">Enroll</Link>
                   </div>
                 </div>
                 <div className="bg-[#222222] rounded-lg overflow-hidden">
@@ -94,7 +95,7 @@ export default function AllCourses(){
                   <div className="p-4">
                     <h3 className="text-lg font-bold mb-2">Advanced CSS and Responsive Design</h3>
                     <p className="text-gray-400 mb-4">$69.99</p>
-                    <Button variant="teal">Enroll</Button>
+                    <Link variant="teal">Enroll</Link>
                   </div>
                 </div>
                 <div className="bg-[#222222] rounded-lg overflow-hidden">
@@ -112,7 +113,7 @@ export default function AllCourses(){
                   <div className="p-4">
                     <h3 className="text-lg font-bold mb-2">Mastering TypeScript for Enterprise Applications</h3>
                     <p className="text-gray-400 mb-4">$89.99</p>
-                    <Button variant="teal">Enroll</Button>
+                    <Link variant="teal">Enroll</Link>
                   </div>
                 </div>
               </div>

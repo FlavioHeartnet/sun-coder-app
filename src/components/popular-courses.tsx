@@ -40,7 +40,7 @@ export default function PopularCourses(){
                 />
                 <h3 className="text-lg font-bold mb-1">JavaScript for Beginners</h3>
                 <p className="text-gray-400 mb-2">$59.99</p>
-                <Button variant="teal">Enroll</Button>
+                <Link variant="teal">Enroll</Link>
               </div>
               <div className="flex-shrink-0 w-64">
                 <Image
@@ -56,7 +56,7 @@ export default function PopularCourses(){
                 />
                 <h3 className="text-lg font-bold mb-1">React.js for Web Development</h3>
                 <p className="text-gray-400 mb-2">$79.99</p>
-                <Button variant="teal">Enroll</Button>
+                <Link variant="teal">Enroll</Link>
               </div>
               <div className="flex-shrink-0 w-64">
                 <Image
@@ -72,7 +72,7 @@ export default function PopularCourses(){
                 />
                 <h3 className="text-lg font-bold mb-1">Full-Stack Development with Node.js</h3>
                 <p className="text-gray-400 mb-2">$99.99</p>
-                <Button variant="teal">Enroll</Button>
+                <Link variant="teal">Enroll</Link>
               </div>
             </div>
           </div>
