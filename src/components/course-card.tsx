@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Link } from "./ui/link";
 
-export default function CourseCard({title = '', price='', image='/placeholder.svg', isPlanActive=false}){
+export default function CourseCard({title = '', price='', image='/placeholder.svg', isPlanActive=false, path = '#'}){
     return(
         <div className="bg-[#222222] rounded-lg overflow-hidden">
         <Image
@@ -18,7 +18,7 @@ export default function CourseCard({title = '', price='', image='/placeholder.sv
         <div className="p-4">
           <h3 className="text-lg font-bold mb-2">{title}</h3>
           <p className="text-gray-400 mb-4">{price}</p>
-          { isPlanActive ? <Link variant='teal' href='/courses/javascript'>Assistir</Link>:<Link variant='teal' href='/courses/javascript'>Comprar</Link>}
+          { isPlanActive ? <Link variant='teal' href={path}>Assistir</Link>:<Link variant='teal' href={path}>Comprar</Link>}
         </div>
       </div> 
     );
