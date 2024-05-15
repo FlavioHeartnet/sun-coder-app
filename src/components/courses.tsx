@@ -1,9 +1,10 @@
 //TODO: Make the courses purchaseble in stripe and update database
 'use client';
 import Image from "next/image";
-import Link from "next/link";
+
 import { useAnimate, useInView } from "framer-motion"
 import { useEffect } from 'react';
+import { Link } from "./ui/link";
 
 export default function Courses(){
     const [scope, animate] = useAnimate()
@@ -80,11 +81,15 @@ export default function Courses(){
                         </p>
                     </div>
                     </div>
-                   
+                    
+                    
                 </div>
+                <div className="space-y-2">
+                        <Link size={'lg'} href="/courses">Ver todos</Link>
+                    </div>
                 <div className="mx-auto">
                         <p className="text-xl font-bold text-gray-500 dark:text-gray-400">Quer aproveitar e levar logo tudo de uma vez?</p>
-                        <Link href='#' onClick={(event) => handleAnchorClick(event, 'assinar')} className="btn btn-accent text-xl mt-5 w-64">Quero todos os cursos</Link>
+                        <Link size={'lg'} variant={'teal'} href='#' onClick={(event) => handleAnchorClick(event, 'assinar')} className="text-black text-xl mt-5 w-64">Quero todos os cursos</Link>
                     </div>
                 </div>
             </section>
