@@ -16,7 +16,7 @@ export default function Courses(){
             ease: 'easeInOut', 
           },})
         }
-     }, [isInView])
+     }, [animate, isInView, scope])
 
     function handleAnchorClick(event: { preventDefault: () => void; }, id: string) {
         event.preventDefault(); // Prevent default jump behavior
