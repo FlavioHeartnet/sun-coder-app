@@ -8,9 +8,9 @@ import { useEffect } from "react";
 export default function MontlyCheckout(){
   const router = useRouter();
   const handleCheckout = async() => {
-    const { user_id, email, isAuth, products } = await getUserInfoAction();
+    const { user_id, email, isAuth, subscriptions } = await getUserInfoAction();
     if (isAuth) {
-      if(products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
+      if(subscriptions.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_MONTHLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
         toast.error('Você já tem esta assinatura!');
         router.push('/');
       }else{

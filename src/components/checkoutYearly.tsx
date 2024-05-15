@@ -28,14 +28,14 @@ export default function CheckoutYearly(data: { products:UserProduct[] }){
   const handleCheckout = async() => {
     setPending(true);
     
-    const { isAuth, products } = await getUserInfoAction();
+    const { isAuth, subscriptions } = await getUserInfoAction();
 
     if (!isAuth) {
       router.push('/api/auth/login?post_login_redirect_url=/yearlyCheckout');
       return;
     }
 
-    if(products.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
+    if(subscriptions.find((e) => e.activePriceId == process.env.NEXT_PUBLIC_YEARLY_STRIPE_SUBSCRIPTION_PRICE_ID)){
       toast.error('Você já possui essa assinatura ativa!');
       setPending(false);
       return;

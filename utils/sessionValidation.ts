@@ -15,7 +15,7 @@ export type SessionValidationType = {
     lastname: string;
     isAuth: boolean;
     profilePicture: string;
-    products: UserProduct[];
+    subscriptions: UserProduct[];
 }
 export async function SessionValidation(isProduct = false): Promise<SessionValidationType>{
     let user_id = '' 
@@ -24,7 +24,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
     let lastname = '';
     let isAuth:boolean = false;
     let profilePicture: string = '';
-    let products: UserProduct[] = [];
+    let subscriptions: UserProduct[] = [];
 
     const {
       getUser,
@@ -57,7 +57,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
                     description: productInfo.description,
                   } as UserProduct;
               });
-              products = await Promise.all(productsPromise);
+              subscriptions = await Promise.all(productsPromise);
             }
     }
     return {
@@ -67,7 +67,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
         lastname,
         isAuth,
         profilePicture,
-        products
+        subscriptions
     } as SessionValidationType;
      
 }

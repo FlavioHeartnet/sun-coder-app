@@ -20,7 +20,7 @@ export default async function ProfilePage() {
     firstname = resp.firstname;
     lastname = resp.lastname;
     profilePicture = resp.profilePicture;
-    const products: UserProduct[] = resp.products;
+    const products: UserProduct[] = resp.subscriptions;
     const activeProducts = products.map((product, index) => {
         return <li key={index} className="text-xl mt-5">{ product.product }</li>;
     });

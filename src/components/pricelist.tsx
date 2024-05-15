@@ -34,7 +34,7 @@ export async function PriceList() {
               <div className="grid gap-0.5 text-sm leading-loose">
                 <p className="text-base font-medium tracking-wide sm:text-lg">Cobrado mensalmente</p>
               </div>
-              <CheckoutMonthtly products={userInfos.products}/>
+              <CheckoutMonthtly products={userInfos.subscriptions}/>
             </CardContent>
           </Card>
           <Card>
@@ -46,7 +46,7 @@ export async function PriceList() {
               <div className="grid gap-0.5 text-sm leading-loose">
                 <p className="text-base font-medium tracking-wide">Economize R$89 com o plano anual</p>
               </div>
-              <CheckoutYearly products={userInfos.products} />
+              <CheckoutYearly products={userInfos.subscriptions} />
             </CardContent>
           </Card>
         </div>
