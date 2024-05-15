@@ -1,7 +1,9 @@
+
 import { cva, type VariantProps } from "class-variance-authority"
-import Linknext from "next/link"
+
 import { cn } from "@/lib/utils"
-const linkVariants = cva(
+import React from "react"
+const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-gray-950 dark:focus-visible:ring-gray-300",
   {
     variants: {
@@ -30,12 +32,21 @@ const linkVariants = cva(
     },
   }
 )
-//TODO: fix this, to match the component pattern
-export default function Link({variant, size, className, href, text}){
-  return (
-    <Linknext href={href} className={cn(linkVariants({ variant, size, className }))}>{text}</Linknext>
-  )
-}
+export interface ButtonProps
+  extends React.LinkHTMLAttributes<HTMLAnchorElement>,
+    VariantProps<typeof buttonVariants> {}
+
+const Link: React.FC<ButtonProps> = ({
+  className,
+  variant,
+  size,
+  ...props
+
+}) => <a className={cn(buttonVariants({ variant, size, className }))} {...props} />  
+
+Link.displayName = "Link"
+
+export { Link, buttonVariants }
 
 
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
-import Link from "./ui/link";
+import {Link} from "./ui/link";
 
 
 //TODO: Add a condition to then the user buy a Premium subs, the button turn to 'watch' and the price disapear
@@ -24,8 +24,7 @@ export default function PopularCourses(){
                 />
                 <h3 className="text-lg font-bold mb-1">Mastering JavaScript: From Beginner to Advanced</h3>
                 <p className="text-gray-400 mb-2">$49.99</p>
-                <Button variant="teal">Enroll</Button>
-                <Link variant='teal' href='/courses/javascript' size='default' className={undefined} text='Enroll' />
+                <Link variant='teal' href='/courses/javascript'>Enroll</Link>
               </div>
               <div className="flex-shrink-0 w-64">
                 <Image
