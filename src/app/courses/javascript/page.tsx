@@ -5,11 +5,11 @@ import { JSX, SVGProps } from "react"
 //TODO: add BR info and make reusable components for other pages
 export default function Javascript() {
   return (
-    <div className="w-full bg-[#141414] text-white">
+    <div className="w-full dark:bg-[#141414] dark:text-white">
       <main>
         <section className="relative h-[80vh] min-h-screen overflow-hidden">
           <span className="w-full h-full object-cover rounded-md bg-gray-100 dark:bg-gray-800" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t dark:from-[#141414] to-transparent" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 space-y-6">
             <h1 className="text-4xl sm:text-6xl font-bold">Mastering JavaScript: From Beginner to Advanced</h1>
             <p className="text-lg sm:text-xl max-w-[800px]">
@@ -18,7 +18,7 @@ export default function Javascript() {
             </p>
             <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
               <Button variant="outline">Enroll Now</Button>
-              <Link className="text-gray-300 hover:text-gray-400" href="#more">
+              <Link className="dark:text-gray-300 hover:text-gray-400" href="#more">
                 Learn More
               </Link>
             </div>
@@ -28,7 +28,7 @@ export default function Javascript() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold mb-6">Course Overview</h2>
-              <p className="text-gray-300 mb-8">
+              <p className="dark:text-gray-300 mb-8">
                 Our JavaScript training program is designed to take you from beginner to advanced, covering a wide range
                 of topics and techniques. Whether youre just starting out or looking to enhance your existing skills,
                 this course has something for everyone.
@@ -36,7 +36,7 @@ export default function Javascript() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-bold mb-2">Curriculum</h3>
-                  <p className="text-gray-300">
+                  <p className="dark:text-gray-300">
                   <CircleCheckIcon className="mr-2 inline h-5 w-5 text-green-500" /> Fundamentals of JavaScript: syntax, data types, variables, operators, and control flow
                     <br /><CircleCheckIcon className="mr-2 inline h-5 w-5 text-green-500" />  Advanced JavaScript: functions, objects, arrays, and prototypes
                     <br /><CircleCheckIcon className="mr-2 inline h-5 w-5 text-green-500" />  Modern JavaScript: ES6+ features, modules, and asynchronous programming
@@ -47,7 +47,7 @@ export default function Javascript() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-2">Learning Outcomes</h3>
-                  <p className="text-gray-300">
+                  <p className="dark:text-gray-300">
                   <CircleCheckIcon className="mr-2 inline h-5 w-5 text-green-500" />  Become proficient in JavaScript syntax and language features
                     <br /><CircleCheckIcon className="mr-2 inline h-5 w-5 text-green-500" />  Develop a deep understanding of modern JavaScript frameworks and libraries
                     <br /><CircleCheckIcon className="mr-2 inline h-5 w-5 text-green-500" />  Build dynamic and responsive web applications
@@ -57,7 +57,7 @@ export default function Javascript() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-2">Who is this for?</h3>
-                  <p className="text-gray-300">
+                  <p className="dark:text-gray-300">
                     This course is designed for anyone interested in learning JavaScript, from complete beginners to
                     experienced developers looking to expand their skills. Whether youre a web developer, software
                     engineer, or aspiring programmer, this comprehensive training program will help you master
