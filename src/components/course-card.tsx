@@ -3,7 +3,7 @@ import { Link } from "./ui/link";
 
 export default function CourseCard({title = '', price='', image='/placeholder.svg', isPlanActive=false, path = '#'}){
     return(
-        <div className="bg-[#222222] rounded-lg overflow-hidden">
+        <div className="bg-[#e0dddd] dark:bg-[#222222] rounded-lg overflow-hidden">
         <Image
           alt="Course Image"
           className="w-full h-48 object-cover"

@@ -10,7 +10,7 @@ export default async function CoursesPage() {
   return (
     <Layout>
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 bg-[#141414] text-white">
+      <main className="flex-1">
         <CtaProSub/>
         <PopularCourses/>
         <AllCourses/>

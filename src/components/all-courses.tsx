@@ -50,7 +50,7 @@ const coursesComponents = courses.map((a, i) => {
 //TODO: Add a condition to then the user buy a Premium subs, the button turn to 'watch' and the price disapear
 export default function AllCourses(){
     return (
-        <section className="bg-[#141414] py-12 px-4 md:px-8">
+        <section className="dark:bg-[#141414] py-12 px-4 md:px-8">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8">
               <h2 className="text-2xl font-bold mb-6">All Courses</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

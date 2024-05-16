@@ -36,7 +36,7 @@ const coursesComponents = courses.map((a, i) => {
 //TODO: Add a condition to then the user buy a Premium subs, the button turn to 'watch' and the price disapear
 export default function PopularCourses(){
     return(
-        <section className="bg-[#222222] py-12 px-4 md:px-8">
+        <section className="dark:bg-[#222222] py-12 px-4 md:px-8">
           <div className="container mx-auto">
             <h2 className="text-2xl font-bold mb-6">Popular Courses</h2>
             <div className="flex gap-4 space-x-4 overflow-x-auto">
