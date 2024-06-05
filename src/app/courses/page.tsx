@@ -11,7 +11,7 @@ export default async function CoursesPage() {
     <Layout>
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
-        <CtaProSub/>
+        <CtaProSub isPlanActive={subscriptions[0].planActive} />
         <PopularCourses/>
         <AllCourses/>
       </main>
