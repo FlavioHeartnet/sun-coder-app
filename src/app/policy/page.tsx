@@ -6,10 +6,10 @@ export default function Policy(){
       <div className="mt-6 space-y-8">
       <p className="text-2xl font-semibold"><b>Data de Vigência:</b> 20/06/2024</p>
       <p className="mt-4 text-muted-foreground">
-        <strong>Suncoder</strong> ("nós", "nosso" ou "nossa") está comprometido em proteger sua privacidade.
+        <strong>Suncoder</strong> (&quot;nós&quot;, &quot;nosso&quot; ou &quot;nossa&quot;) está comprometido em proteger sua privacidade.
         Esta Política de Privacidade explica como coletamos, usamos, divulgamos e protegemos suas informações
         quando você visita nosso site [Inserir URL] e usa nossa plataforma de cursos de desenvolvimento web
-        (o "Serviço"). Por favor, leia esta Política de Privacidade com atenção. Se você não concordar com os
+        (o &quot;Serviço&quot;). Por favor, leia esta Política de Privacidade com atenção. Se você não concordar com os
         termos desta Política de Privacidade, por favor, não acesse o Serviço.
       </p>
 
@@ -53,7 +53,7 @@ export default function Policy(){
       <p>Não solicitamos conscientemente informações de ou comercializamos para crianças menores de 13 anos. Se soubermos que coletamos informações pessoais de uma criança menor de 13 anos sem verificação do consentimento dos pais, excluiremos essas informações o mais rápido possível. Se você acreditar que podemos ter qualquer informação de ou sobre uma criança menor de 13 anos, entre em contato conosco pelo [Inserir Informações de Contato].</p>
 
       <h2 className="text-2xl font-semibold">6. Alterações a Esta Política de Privacidade</h2>
-      <p>Podemos atualizar esta Política de Privacidade de tempos em tempos para refletir, por exemplo, alterações em nossas práticas ou por outros motivos operacionais, legais ou regulatórios. Nós notificaremos você de quaisquer alterações atualizando a "Data de Vigência" no topo desta Política de Privacidade. Encorajamos você a revisar esta Política de Privacidade periodicamente para se manter informado sobre nossa coleta, uso e divulgação de suas informações pessoais.</p>
+      <p>Podemos atualizar esta Política de Privacidade de tempos em tempos para refletir, por exemplo, alterações em nossas práticas ou por outros motivos operacionais, legais ou regulatórios. Nós notificaremos você de quaisquer alterações atualizando a &quot;Data de Vigência&quot; no topo desta Política de Privacidade. Encorajamos você a revisar esta Política de Privacidade periodicamente para se manter informado sobre nossa coleta, uso e divulgação de suas informações pessoais.</p>
 
       <h2 className="text-2xl font-semibold">7. Entre em Contato Conosco</h2>
       <p>Se você tiver perguntas ou comentários sobre esta Política de Privacidade, entre em contato conosco pelo:</p>
