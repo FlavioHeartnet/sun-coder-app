@@ -25,7 +25,7 @@ export default function HomeIntro(){
           <div className="grid h-full items-center justify-center gap-6 px-4 text-center md:px-6 lg:gap-10">
             <div className="space-y-3">
               <h1 className="text-white text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                A plataforma essencial para aprender<br/> programação
+                Aprenda desenvolvimento de aplicações web<br/> <span className='text-[#eab308]'>rápido</span>
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                 Suncoder é uma plataforma com conteúdos <span className='text-[#eab308]'>extremamente rápidos</span> e <span className='text-[#ec4899]'>muito descontraídos</span> para aprimorar suas habilidades de programação.
