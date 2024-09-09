@@ -13,9 +13,6 @@ services:
       context: .
     environment:
       NODE_ENV: production
-    env_file:
-      - path: /.env
-        required: true
     ports:
       - 3000:3000
 
