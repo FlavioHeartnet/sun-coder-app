@@ -48,7 +48,7 @@ export async function SessionValidation(isProduct = false): Promise<SessionValid
                   const subscriptionId = item?.subscription_id;
                   const planActive = item?.plan_active;
                   const priceInfo = await getPricebySub(subscriptionId);
-                  const productInfo = await getProductbyId(priceInfo?.productId);
+                  const productInfo = await getProductbyId(priceInfo ? priceInfo.productId : '' );
                   return {
                     planActive,
                     subscriptionId,

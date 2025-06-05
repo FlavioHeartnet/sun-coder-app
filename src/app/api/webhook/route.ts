@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cancelSubscription, stripe } from './../../../../utils/stripe';
-import { supabaseAdmin } from './../../../../utils/supabaseServer';
+import { cancelSubscription, stripe } from '../../../../utils/stripe';
+import { supabaseAdmin } from '../../../../utils/supabaseServer';
 import Stripe from 'stripe';
 
 export async function POST(request: NextRequest) {
@@ -26,12 +26,12 @@ export async function POST(request: NextRequest) {
         .select('subscription_id, plan_active')
         .eq('user_id', userId).eq('plan_active', true)
         .order('created_at');
-        if(!fetchError){
-          customer.forEach(async i => {
+        if(customer){
+          for (const i of customer) {
               if(!await cancelSubscription(i.subscription_id)){
                   console.log("Error cancelling subscription: " +i.subscription_id);
               }
-          })
+          }
         }
         // Create or update the stripe_customer_id in the stripe_customers table
         const { error } = await supabaseAdmin()
