@@ -5,12 +5,12 @@ import LoggedOutButton from "./loggedOutButtons";
 
 export default async function UserOptions(){
 
-  const { isAuth } = await getUserInfoAction(false);
+  const { isAuth, user_id } = await getUserInfoAction(false);
     return (
 
             <div className="ml-auto flex items-center gap-4">
             {
-              isAuth ? <LoggedInButtons/> : <LoggedOutButton/>
+              isAuth ? <LoggedInButtons user_id={user_id}/> : <LoggedOutButton/>
             }
             </div>
     );

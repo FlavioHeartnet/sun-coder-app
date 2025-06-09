@@ -4,22 +4,18 @@ import { getPortalURL, getBillingPortalData } from './portalAction';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getUserInfoAction } from '../actions/getUserInfoAction';
 import Link from 'next/link';
-import {SupabaseAdapter} from "@/core/infra/supabase/supabaseAdapter";
 
-export default function PortalButton() {
+export default function PortalButton({user_id}: {user_id: string}) {
   const [ pending, setPending ] = useState(false);
   const [isPlanActive, setisPlanActive] = useState(false);
-  const [user_id, setUser_id] = useState("");
 
   useEffect(()=>{
     async function getCustomerPlan(){
-      setUser_id((await getUserInfoAction(false)).user_id);
-      setisPlanActive((await getBillingPortalData(user_id, new SupabaseAdapter()))?.plan_active);
+      setisPlanActive((await getBillingPortalData(user_id))?.plan_active);
     }
     getCustomerPlan();
-  }, [user_id, isPlanActive]);
+  }, []);
   const handleClick = async () => {
     try {
       setPending(true);
@@ -28,7 +24,7 @@ export default function PortalButton() {
         setPending(false);
         toast.error( 'Por favor, acesse sua conta para gerenciar sua fatura.');
       }
-      const customer = await getBillingPortalData(user_id, new SupabaseAdapter());
+      const customer = await getBillingPortalData(user_id);
       if(customer?.plan_active){
         const { url } = await getPortalURL(customer?.stripe_customer_id);
         console.log("redirect:" +url)
