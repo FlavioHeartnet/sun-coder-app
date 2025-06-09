@@ -16,3 +16,4 @@ export class SupabaseAdapter implements IDbUseCases{
     }
 
 }
+export const db = new SupabaseAdapter();
