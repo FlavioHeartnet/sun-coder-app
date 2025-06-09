@@ -50,11 +50,7 @@ export default function PortalButton({user_id}: {user_id: string}) {
   return (
     <>
       {
-        isPlanActive ? <button disabled={pending} onClick={handleClick} className="flex items-center gap-2 text-sm font-medium [&:hover]:underline disabled:text-zing-600 disabled:cursor-progress" >
-        <Image src='/gear.svg' className="dark:invert" alt={""} width={15} height={15} />
-        <span>Gerenciar Assinatura</span>
-      </button> 
-      : loading ?
+       loading ?
         <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
@@ -62,10 +58,16 @@ export default function PortalButton({user_id}: {user_id: string}) {
             >
               <Loader2 className="w-8 h-8 dark" />
         </motion.div>
-        : <Link className="flex items-center gap-2 text-sm font-medium [&:hover]:underline" href="#assinar">
+        : isPlanActive ? 
+          <button disabled={pending} onClick={handleClick} className="flex items-center gap-2 text-sm font-medium [&:hover]:underline disabled:text-zing-600 disabled:cursor-progress" >
+            <Image src='/gear.svg' className="dark:invert" alt={""} width={15} height={15} />
+            <span>Gerenciar Assinatura</span>
+          </button> 
+        :   
+          <Link className="flex items-center gap-2 text-sm font-medium [&:hover]:underline" href="#assinar">
               <Image src='/gear.svg' className="dark:invert" alt={""} width={15} height={15} />
               <span className="hidden md:block">Assinar Pro</span>
-        </Link>
+          </Link>
       }
         
     </>
