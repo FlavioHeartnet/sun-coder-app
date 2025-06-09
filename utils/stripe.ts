@@ -2,6 +2,15 @@ import Stripe from 'stripe';
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
+export async function createPortalSession(customerId: string) {
+    const portalSession = await stripe.billingPortal.sessions.create({
+        customer: customerId,
+        return_url: `${process.env.NEXT_PUBLIC_BASE_URL_API}`,
+    });
+
+    return { id: portalSession.id, url: portalSession.url };
+}
+
 export async function getProductbyId(id: string){
     const resp = await fetch('https://api.stripe.com/v1/products/'+id, {
                   method: "POST",

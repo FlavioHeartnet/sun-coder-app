@@ -1,21 +1,22 @@
 'use client';
 
-import { createPortalSession, getBillingPortalData } from './portalAction';
+import { getPortalURL, getBillingPortalData } from './portalAction';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getUserInfoAction } from '../actions/getUserInfoAction';
 import Link from 'next/link';
+import {SupabaseAdapter} from "@/core/infra/supabase/supabaseAdapter";
 
 export default function PortalButton() {
   const [ pending, setPending ] = useState(false);
   const [isPlanActive, setisPlanActive] = useState(false);
-  const [user_id, setUser_id] = useState("false");
+  const [user_id, setUser_id] = useState("");
 
   useEffect(()=>{
     async function getCustomerPlan(){
       setUser_id((await getUserInfoAction(false)).user_id);
-      setisPlanActive((await getBillingPortalData(user_id))?.plan_active);
+      setisPlanActive((await getBillingPortalData(user_id, new SupabaseAdapter()))?.plan_active);
     }
     getCustomerPlan();
   }, [user_id, isPlanActive]);
@@ -25,11 +26,12 @@ export default function PortalButton() {
       
       if (!user_id) {
         setPending(false);
-        throw 'Por favor, acesse sua conta para gerenciar sua fatura.';
+        toast.error( 'Por favor, acesse sua conta para gerenciar sua fatura.');
       }
-      const customer = await getBillingPortalData(user_id);
+      const customer = await getBillingPortalData(user_id, new SupabaseAdapter());
       if(customer?.plan_active){
-        const { url } = await createPortalSession(customer?.stripe_customer_id);
+        const { url } = await getPortalURL(customer?.stripe_customer_id);
+        console.log("redirect:" +url)
         setPending(false);
         window.location.href = url;
       }else{

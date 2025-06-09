@@ -1,25 +1,13 @@
 'use server';
-import { stripe } from "../../../utils/stripe";
-import { supabaseAdmin } from "../../../utils/supabaseServer";
+import {createPortalSession} from "../../../utils/stripe";
+import {IDbUseCases} from "@/core/infra/IDbUseCases";
 
 
-export async function createPortalSession(customerId: string) {
-    const portalSession = await stripe.billingPortal.sessions.create({
-        customer: customerId,
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL_API}`,
-      });
-  
-      return { id: portalSession.id, url: portalSession.url };
+export async function getPortalURL(customerId: string) {
+    return createPortalSession(customerId);
 }
 
-export const getBillingPortalData = async (user_id:string) => {
+export const getBillingPortalData = async (user_id:string, db: IDbUseCases) => {
   'use server';
-  const { data: customer, error: fetchError } = await supabaseAdmin()
-    .from('stripe_customers')
-    .select('stripe_customer_id, plan_active')
-    .eq('user_id', user_id).eq('plan_active', true)
-    .order('created_at')
-    .single();
-
-    return customer;
+  return await db.getBillingData(user_id);
 }

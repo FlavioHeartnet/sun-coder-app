@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cancelSubscription, stripe } from '../../../../utils/stripe';
-import { supabaseAdmin } from '../../../../utils/supabaseServer';
+import { supabaseAdmin } from '@/core/infra/supabase/supabaseServer';
 import Stripe from 'stripe';
 
 export async function POST(request: NextRequest) {

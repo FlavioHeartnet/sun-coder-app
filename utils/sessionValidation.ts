@@ -1,5 +1,5 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { supabaseAdmin } from "./supabaseServer";
+import { supabaseAdmin } from "@/core/infra/supabase/supabaseServer";
 import { getPricebySub, getProductbyId } from "./stripe";
 export type UserProduct = {
   planActive: boolean;
